@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="FileSaver.js"></script>
+    <script src="papaparse.js"></script>
+</head>
+<body>
+    <button onclick="test();">開始轉換</button>
+<script >      
+    function test(){
+        Papa.parse('usage.txt', {
+            header: true,
+            download: true,
+            dynamicTyping: true,
+            skipEmptyLines: true,
+            complete: function(results) {                
+                results.data.forEach(function (element, index){
+                    rstflt=results.data.filter(word => 
+                        [element["帳單年"]-1].includes(word['帳單年']) 
+                        & [element["帳單月"]].includes(word['帳單月']) 
+                        & [element["公開報表序號"]].includes(word['公開報表序號']) );
+                    if(rstflt.length==0){
+                        element["上年度總用電度"]="";
+                    }else{
+                        element["上年度總用電度"]=rstflt[0]['總用電度'];
+                    }
+                })        
+                csv=Papa.unparse(results.data)
+                saveAs(new Blob([csv],{ type: "text/plain;charset=utf-8" }), "1.txt");
+            }
+        });   
+    }     
+</script>
+</body>
+</html>

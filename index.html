@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NCYU自行抄表各棟建築物用電情形</title>
+    <!-- external libs from cdnjs -->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
+    <script src="jquery.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
+    <!-- PivotTable.js libs from cdnjs -->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.14.0/pivot.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.14.0/pivot.min.css"> -->
+    <script src="pivot.js"></script>
+    <link rel="stylesheet" href="pivot.css">
+
+    <!-- subtotal.js libs from ../dist -->
+    <script src="subtotal.js"></script>
+    <link rel="stylesheet" type="text/css" href="subtotal.css">
+  
+
+    <!-- optional: mobile support with jqueryui-touch-punch -->
+    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> -->
+    <script src="jquery.ui.touch-punch.min.js"></script>
+
+    <script src="papaparse.js"></script>
+    <script src="plotly-basic-latest.min.js"></script>
+    <script src="FileSaver.js"></script>   
+    
+
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <form class="form-inline">
+                      
+                      <button class="btn btn-outline-success" type="button" onclick="今年();" id="btn1">今年用電情形</button>
+                      <button class="btn btn-outline-success" type="button" onclick="與去年相比();">與去年相比</button>
+                      <button class="btn btn-outline-success" type="button" onclick="所有年度();">所有年度用電情形</button>
+                      <button class="btn btn-outline-success" type="button" onclick="自行定義();">自行定義</button>                      
+                    </form>
+                  </nav>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div id="output"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="usage.js"></script>
+</body>
+</html>
