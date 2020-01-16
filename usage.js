@@ -10,7 +10,8 @@ Papa.parse('usage.txt', {
     dynamicTyping: true,
     skipEmptyLines: true,
     complete: function(r) {
-       results=r.data;       
+       results=r.data; 
+       與去年相比();      
     }
 })
 
