@@ -10,8 +10,9 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
     <script src="jquery.min.js"></script>
     <script src="jquery-ui.min.js"></script>
-    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
     <!-- PivotTable.js libs from cdnjs -->
@@ -32,22 +33,68 @@
     <script src="papaparse.js"></script>
     <script src="plotly-basic-latest.min.js"></script>
     <script src="FileSaver.js"></script>   
+    <script src="tableexport.js"></script>
+    <script src="xls.core.js"></script>
+    <script type="text/javascript" src="../dist/d3_renderers.js"></script>
+    <script type="text/javascript" src="../dist/plotly_renderers.js"></script>
+    <script type="text/javascript" src="../dist/export_renderers.js"></script>
+    <style>
+        .node {
+          border: solid 1px white;
+          font: 10px sans-serif;
+          line-height: 12px;
+          overflow: hidden;
+          position: absolute;
+          text-indent: 2px;
+        }
+    </style>
     
 
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <form class="form-inline">
-                      
-                      <button class="btn btn-outline-success" type="button" onclick="今年();" id="btn1">今年用電情形</button>
-                      <button class="btn btn-outline-success" type="button" onclick="與去年相比();" id="btn2">與去年相比</button>
-                      <button class="btn btn-outline-success" type="button" onclick="所有年度();" id="btn3">所有年度用電情形</button>
-                      <button class="btn btn-outline-success" type="button" onclick="自行定義();" id="btn4">自行定義</button>                      
+            <div class="col-md-12"> 
+                <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+                    <form class="form-inline my-2 my-lg-0">
+                        <div class="btn-group">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                自設電錶統計
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" onclick="今年();">今年用電情形</a>
+                                <a class="dropdown-item" onclick="與去年相比();">與去年相比</a>
+                                <a class="dropdown-item" onclick="所有年度();">所有年度用電情形</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick="自行定義();">自行定義</a>
+                            </div>                        
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-secondary  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                自來水用水統計
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" onclick="今年用水();">今年用水情形</a>
+                                <a class="dropdown-item" onclick="用水與去年相比();">與去年相比</a>
+                                <a class="dropdown-item" onclick="所有年度用水();">所有年度用水情形</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick="用水自行定義();">自行定義</a>
+                            </div>                        
+                        </div>
+                        <div class="btn-group">
+                            <button class="btn btn-success  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                台電用電統計
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" onclick="今年用電();">今年用電情形</a>
+                                <a class="dropdown-item" onclick="用電與去年相比();">與去年相比</a>
+                                <a class="dropdown-item" onclick="所有年度用電();">所有年度用電情形</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick="用電自行定義();">自行定義</a>
+                            </div>                        
+                        </div>
                     </form>
-                  </nav>
+                </nav>         
             </div>
         </div>
         
