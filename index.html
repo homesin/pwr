@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NCYU自行抄表各棟建築物用電情形</title>
+    <title>NCYU用水用電統計</title>
     <!-- external libs from cdnjs -->
     <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
@@ -32,12 +32,13 @@
 
     <script src="papaparse.js"></script>
     <script src="plotly-basic-latest.min.js"></script>
-    <script src="FileSaver.js"></script>   
+    <!--<script src="FileSaver.js"></script>   
     <script src="tableexport.js"></script>
-    <script src="xls.core.js"></script>
+    <script src="xls.core.js"></script>-->
     <script type="text/javascript" src="../dist/d3_renderers.js"></script>
     <script type="text/javascript" src="../dist/plotly_renderers.js"></script>
     <script type="text/javascript" src="../dist/export_renderers.js"></script>
+    <!--<script src="alasql.js"></script>-->
     <style>
         .node {
           border: solid 1px white;
@@ -64,6 +65,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" onclick="今年();">今年用電情形</a>
                                 <a class="dropdown-item" onclick="與去年相比();">與去年相比</a>
+                                <a class="dropdown-item" onclick="近5年度();">近5年度用電情形</a>
                                 <a class="dropdown-item" onclick="所有年度();">所有年度用電情形</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="自行定義();">自行定義</a>
@@ -76,6 +78,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" onclick="今年用水();">今年用水情形</a>
                                 <a class="dropdown-item" onclick="用水與去年相比();">與去年相比</a>
+                                <a class="dropdown-item" onclick="近5年度用水();">近5年度用水情形</a>
                                 <a class="dropdown-item" onclick="所有年度用水();">所有年度用水情形</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="用水自行定義();">自行定義</a>
@@ -88,6 +91,7 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" onclick="今年用電();">今年用電情形</a>
                                 <a class="dropdown-item" onclick="用電與去年相比();">與去年相比</a>
+                                <a class="dropdown-item" onclick="近5年度用電();">近5年度用電情形</a>
                                 <a class="dropdown-item" onclick="所有年度用電();">所有年度用電情形</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="用電自行定義();">自行定義</a>
