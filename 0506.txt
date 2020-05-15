@@ -1,0 +1,9 @@
+mongoimport -d test3 -c pwr --type csv --file usage.txt --headerline
+
+mongo
+use test3
+db.pwr.find( { "帳單年": 109 ,"帳單月":3,"公開報表序號":"A201"} ))))
+
+db.pwr.aggregate({ $group: { _id: '$timestamp', result: { $push: { 'propName': '$propName', 'propValue': '$propValue' } }}})
+
+db.pwr.aggregate( { "$project" : { "單年" : 1, "帳單月" : 1 }})

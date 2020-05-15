@@ -38,7 +38,7 @@
     <script type="text/javascript" src="./dist/d3_renderers.js"></script>
     <script type="text/javascript" src="./dist/plotly_renderers.js"></script>
     <script type="text/javascript" src="./dist/export_renderers.js"></script>
-    <!--<script src="alasql.js"></script>-->
+    <script src="alasql.js"></script>
     <!--datatables object-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/> 
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
@@ -62,39 +62,49 @@
                 <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
                     <form class="form-inline my-2 my-lg-0">
                         <div class="btn-group">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 自設電錶統計
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" onclick="今年();">今年用電情形</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="與去年相比();">與去年相比</a>
+                                <a class="dropdown-item" onclick="同期排行();">同期排行</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="近5年度();">近5年度用電情形</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="所有年度();">所有年度用電情形</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="自行定義();">自行定義</a>
                             </div>                        
                         </div>
                         <div class="btn-group">
-                            <button class="btn btn-secondary  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-secondary  dropdown-toggle btn-sm" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 自來水用水統計
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" onclick="今年用水();">今年用水情形</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="用水與去年相比();">與去年相比</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="近5年度用水();">近5年度用水情形</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="所有年度用水();">所有年度用水情形</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="用水自行定義();">自行定義</a>
                             </div>                        
                         </div>
                         <div class="btn-group">
-                            <button class="btn btn-success  dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-success  dropdown-toggle btn-sm" type="button" id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 台電用電統計
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" onclick="今年用電();">今年用電情形</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="用電與去年相比();">與去年相比</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="近5年度用電();">近5年度用電情形</a>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="所有年度用電();">所有年度用電情形</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick="用電自行定義();">自行定義</a>
