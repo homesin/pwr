@@ -405,6 +405,7 @@ function 所有年度用水() {
     result.forEach(function (element, index) {
         element["水費月"] = element["水費月"] + "月";
         element["水費年"] = element["水費年"] + "年";
+        element["供水區"] =  element["代碼"]+element["供水區"]
     })
     $("#output")
         .pivot(result, {
@@ -440,6 +441,7 @@ function 今年用水() {
     result.forEach(function (element, index) {
         element["水費月"] = element["水費月"] + "月";
         element["水費年"] = element["水費年"] + "年";
+        element["供水區"] =  element["代碼"]+' '+element["供水區"]
     })
 
     $("#output")
@@ -476,6 +478,7 @@ function 用水與去年相比() {
     result.forEach(function (element, index) {
         element["水費月"] = element["水費月"] + "月";
         element["水費年"] = element["水費年"] + "年";
+        element["供水區"] =  element["代碼"]+' '+element["供水區"]
     })
     $("#output")
         .pivot(result, {
@@ -511,6 +514,7 @@ function 近5年度用水() {
     result.forEach(function (element, index) {
         element["水費月"] = element["水費月"] + "月";
         element["水費年"] = element["水費年"] + "年";
+        element["供水區"] =  element["代碼"]+' '+element["供水區"]
     })
     $("#output")
         .pivot(result, {
@@ -543,8 +547,9 @@ function 用水自行定義() {
 
     result = JSON.parse(JSON.stringify(wresults));
     result.forEach(function (element, index) {
-        element["水費月"] = element["水費月"] + "月";
-        element["水費年"] = element["水費年"] + "年";
+        //element["水費月"] = element["水費月"] + "月";
+        //element["水費年"] = element["水費年"] + "年";
+        //element["供水區"] =  element["代碼"]+element["供水區"]
     })
     $("#output")
         .pivotUI(result, {
