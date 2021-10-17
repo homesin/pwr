@@ -122,398 +122,398 @@ const waterprop=[
   ];
 const meterprop=[
     {
-        "DeviceID": "000001",
+        "DeviceID": "D000001",
         "MeterName": "活動中心冰機總盤",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000002",
+        "DeviceID": "D000002",
         "MeterName": "活動中心冰機一號",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000003",
+        "DeviceID": "D000003",
         "MeterName": "活動中心冰機二號",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000004",
+        "DeviceID": "D000004",
         "MeterName": "教學行政區",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000005",
+        "DeviceID": "D000005",
         "MeterName": "行政中心",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000006",
+        "DeviceID": "D000006",
         "MeterName": "第三變電站",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000007",
+        "DeviceID": "D000007",
         "MeterName": "第二變電站",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000008",
+        "DeviceID": "D000008",
         "MeterName": "第四變電站",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000009",
+        "DeviceID": "D000009",
         "MeterName": "應化一館LBS-1",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000010",
+        "DeviceID": "D000010",
         "MeterName": "路燈LBS-2",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000011",
+        "DeviceID": "D000011",
         "MeterName": "應物一、應物二、農藝場總盤LBS-4",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000012",
+        "DeviceID": "D000012",
         "MeterName": "第五變電站",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000013",
+        "DeviceID": "D000013",
         "MeterName": "活動中心",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000014",
+        "DeviceID": "D000014",
         "MeterName": "理工教學大樓",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000015",
+        "DeviceID": "D000015",
         "MeterName": "嘉禾館總盤",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000016",
+        "DeviceID": "D000016",
         "MeterName": "動科館總盤",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000017",
+        "DeviceID": "D000017",
         "MeterName": "森林館總盤",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000018",
+        "DeviceID": "D000018",
         "MeterName": "應物、應化二館",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000019",
+        "DeviceID": "D000019",
         "MeterName": "應物二館+應化二館",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000020",
+        "DeviceID": "D000020",
         "MeterName": "水生館、魚類保育中心GCB-3",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000021",
+        "DeviceID": "D000021",
         "MeterName": "生命資源館GCB-4",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000022",
+        "DeviceID": "D000022",
         "MeterName": "生農一二館植醫系CB-2",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000023",
+        "DeviceID": "D000023",
         "MeterName": "生命科學館LBS-2",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000024",
+        "DeviceID": "D000024",
         "MeterName": "材料試驗場LBS-3",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000025",
+        "DeviceID": "D000025",
         "MeterName": "資工館、國際交流學園LBS-2A",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000026",
+        "DeviceID": "D000026",
         "MeterName": "3-1變電站",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000027",
+        "DeviceID": "D000027",
         "MeterName": "機能系+創新育成大樓GCB2-2",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000028",
+        "DeviceID": "D000028",
         "MeterName": "游泳池+司令台+運動場GCB2-3",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000029",
+        "DeviceID": "D000029",
         "MeterName": "瑞穗館+警衛室+學生活動廣場GCB2-5",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000030",
+        "DeviceID": "D000030",
         "MeterName": "教職員宿舍LC",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000031",
+        "DeviceID": "D000031",
         "MeterName": "綠建築招待所MP-31",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000032",
+        "DeviceID": "D000032",
         "MeterName": "昆蟲館MP-31",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000033",
+        "DeviceID": "D000033",
         "MeterName": "禾康園MP-31",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000034",
+        "DeviceID": "D000034",
         "MeterName": "食品科學館VCB4-1",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000035",
+        "DeviceID": "D000035",
         "MeterName": "機電館VCB4-2",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000036",
+        "DeviceID": "D000036",
         "MeterName": "園藝技藝中心VCB4-3",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000037",
+        "DeviceID": "D000037",
         "MeterName": "4-1變電站VCB4-4",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000038",
+        "DeviceID": "D000038",
         "MeterName": "食品加工廠VCB4-5",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000039",
+        "DeviceID": "D000039",
         "MeterName": "景觀學系大樓VCB4-6",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000040",
+        "DeviceID": "D000040",
         "MeterName": "生技健康館MP-6",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000041",
+        "DeviceID": "D000041",
         "MeterName": "生物機械產業實驗室MP-4",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000042",
+        "DeviceID": "D000042",
         "MeterName": "工程館VCBA1",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000043",
+        "DeviceID": "D000043",
         "MeterName": "農園館VCBB1",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000044",
+        "DeviceID": "D000044",
         "MeterName": "綜合教學大樓VCB-A  ",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000045",
+        "DeviceID": "D000045",
         "MeterName": "圖書資訊館VCB-B  ",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000046",
+        "DeviceID": "D000046",
         "MeterName": "園藝場管理室VCB-C",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000047",
+        "DeviceID": "D000047",
         "MeterName": "第6變電站VCB",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000048",
+        "DeviceID": "D000048",
         "MeterName": "綜合教學大樓1PA",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000049",
+        "DeviceID": "D000049",
         "MeterName": "綜合教學大樓2PA",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000050",
+        "DeviceID": "D000050",
         "MeterName": "綜合教學大樓3PA",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000051",
+        "DeviceID": "D000051",
         "MeterName": "綜合教學大樓4PA",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000052",
+        "DeviceID": "D000052",
         "MeterName": "綜合教學大樓E1PA",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000053",
+        "DeviceID": "D000053",
         "MeterName": "綜合教學大樓E2PA",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000054",
+        "DeviceID": "D000054",
         "MeterName": "綜合教學大樓E3PA",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000055",
+        "DeviceID": "D000055",
         "MeterName": "綜合教學大樓E4PA",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000062",
+        "DeviceID": "D000062",
         "MeterName": "菇舍ML",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000063",
+        "DeviceID": "D000063",
         "MeterName": "嘉大植物園MP",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000064",
+        "DeviceID": "D000064",
         "MeterName": "北側門崗哨",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000065",
+        "DeviceID": "D000065",
         "MeterName": "生物多樣性館總盤",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000066",
+        "DeviceID": "D000066",
         "MeterName": "生農一館生農二館總盤",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000067",
+        "DeviceID": "D000067",
         "MeterName": "植醫系館",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000068",
+        "DeviceID": "D000068",
         "MeterName": "國際會議廳空調動力MACP",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000069",
+        "DeviceID": "D000069",
         "MeterName": "國際會議廳照明ML",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000070",
+        "DeviceID": "D000070",
         "MeterName": "畜牧場校區總盤VCBM",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000071",
+        "DeviceID": "D000071",
         "MeterName": "畜牧場LBS-1",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000072",
+        "DeviceID": "D000072",
         "MeterName": "木材工廠LBS-2",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000073",
+        "DeviceID": "D000073",
         "MeterName": "水生館台灣魚類保育研究中心太陽能",
         "area": "蘭潭"
     },
     {
-        "DeviceID": "000074",
+        "DeviceID": "D000074",
         "MeterName": "學人宿舍用電",
         "area": "民雄"
     },
     {
-        "DeviceID": "000075",
-        "MeterName": "變電站#1",
+        "DeviceID": "D000075",
+        "MeterName": "綠園一二舍、餐廳、鍋爐間、警衛室",
         "area": "民雄"
     },
     {
-        "DeviceID": "000076",
-        "MeterName": "變電站#2",
+        "DeviceID": "D000076",
+        "MeterName": "樂育堂、工友室",
         "area": "民雄"
     },
     {
-        "DeviceID": "000077",
-        "MeterName": "變電站#3",
+        "DeviceID": "D000077",
+        "MeterName": "行政大樓、初教館",
         "area": "民雄"
     },
     {
-        "DeviceID": "000078",
-        "MeterName": "變電站#4",
+        "DeviceID": "D000078",
+        "MeterName": "圖書館",
         "area": "民雄"
     },
     {
-        "DeviceID": "000079",
-        "MeterName": "變電站#5",
+        "DeviceID": "D000079",
+        "MeterName": "科學館",
         "area": "民雄"
     },
     {
-        "DeviceID": "000080",
+        "DeviceID": "D000080",
         "MeterName": "游泳池、司令台、運動場",
         "area": "民雄"
     },
     {
-        "DeviceID": "000081",
+        "DeviceID": "D000081",
         "MeterName": "教育館",
         "area": "民雄"
     },
     {
-        "DeviceID": "000082",
+        "DeviceID": "D000082",
         "MeterName": "大學館與創意樓總用電MCB",
         "area": "民雄"
     },
     {
-        "DeviceID": "000083",
-        "MeterName": "總盤GCB#M",
+        "DeviceID": "D000083",
+        "MeterName": "民雄總盤GCB#M",
         "area": "民雄"
     },
     {
-        "DeviceID": "000084",
-        "MeterName": "變電站#6",
+        "DeviceID": "D000084",
+        "MeterName": "人文館、學而園",
         "area": "民雄"
     },
     {
-        "DeviceID": "000085",
-        "MeterName": "變電站#7",
+        "DeviceID": "D000085",
+        "MeterName": "音樂館、藝術館、新藝樓、社團教室",
         "area": "民雄"
     },
     {
@@ -570,6 +570,46 @@ const meterprop=[
         "DeviceID": "C00011",
         "MeterName": "圖書館總用電",
         "area": "民雄"
+    },
+    {
+        "DeviceID": "E11",
+        "MeterName": "新民總電表",
+        "area": "新民"
+    },
+    {
+        "DeviceID": "E12",
+        "MeterName": "新民A棟",
+        "area": "新民"
+    },
+    {
+        "DeviceID": "E13",
+        "MeterName": "A棟MP盤",
+        "area": "新民"
+    },
+    {
+        "DeviceID": "E21",
+        "MeterName": "B棟MVCBB盤 ",
+        "area": "新民"
+    },
+    {
+        "DeviceID": "E22",
+        "MeterName": "明德樓",
+        "area": "新民"
+    },
+    {
+        "DeviceID": "E31",
+        "MeterName": "動物醫院+游泳池",
+        "area": "新民"
+    },
+    {
+        "DeviceID": "E32",
+        "MeterName": "游泳池",
+        "area": "新民"
+    },
+    {
+        "DeviceID": "E33",
+        "MeterName": "動物醫院",
+        "area": "新民"
     }
 ]
 var results;
@@ -614,35 +654,35 @@ Papa.parse('meter.txt', {
     }
 })
 function MeterThisYear() {
-   // let month1=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
-    //document.querySelector('#head').innerText=`國立嘉義大學自設電錶今年度各棟建築物用電情形${month1!=1?`(1月至${month1}月)`:'(1月)'}`;
-    let  ary=[];
-for (let ii = 0; ii < mresults.length; ii++) {
-    for (let i = 1; i < Object.keys(mresults[0]).length; i++) {
-        ary.push({
-            用電年:moment(mresults[ii].DataTimeStamp).format('YYYY')-1911+'年',
-            用電月:moment(mresults[ii].DataTimeStamp).format('M月'),
-            DeviceID:Object.keys(mresults[ii])[i],
-            建築物:meterprop.find(e=>e.DeviceID==Object.keys(mresults[ii])[i]).MeterName,
-            校區:meterprop.find(e=>e.DeviceID==Object.keys(mresults[ii])[i]).area,
-            MonthUsageDegree:mresults[ii][Object.keys(mresults[ii])[i]],
-        })
+    let ary = [];
+    for (let ii = 0; ii < mresults.length; ii++) {
+        for (let i = 1; i < Object.keys(mresults[0]).length; i++) {
+            ary.push({
+                用電年: moment(mresults[ii].DataTimeStamp).format('YYYY') - 1911 + '年',
+                用電月: moment(mresults[ii].DataTimeStamp).format('M月'),
+                DeviceID: Object.keys(mresults[ii])[i],
+                建築物: meterprop.find(e => e.DeviceID == Object.keys(mresults[ii])[i]).MeterName,
+                校區: meterprop.find(e => e.DeviceID == Object.keys(mresults[ii])[i]).area,
+                MonthUsageDegree: mresults[ii][Object.keys(mresults[ii])[i]],
+            })
+        }
     }
-}
     result = JSON.parse(JSON.stringify(ary));
-    result=result.filter(list=>!meterexcludelist.includes(list.DeviceID));  
-    let month1=Math.max(...[...new Set(result.filter(e=>e.用電年==year+'年').map(e=>e.用電月.replace('月','')))]);
-    document.querySelector('#head').innerText=`國立嘉義大學能源管理系統各棟建築物用電情形${month1!=1?`(1月至${month1}月)`:'(1月)'}`;
+    result = result.filter(list => !meterexcludelist.includes(list.DeviceID));
+    result = result.filter(e=>e.用電年=='110年');
+    
+    let month1 = Math.max(...[...new Set(result.filter(e => e.用電年 == year + '年').map(e => e.用電月.replace('月', '')))]);
+    document.querySelector('#head').innerText = `國立嘉義大學能源管理系統各棟建築物用電情形${month1!=1?`(1月至${month1}月)`:'(1月)'}`;
     var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
     var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["MonthUsageDegree"]);
     var sortAs = $.pivotUtilities.sortAs
     //result = result.filter(word => word['帳單年'] == year);
-   
+
 
     $("#output")
         .pivot(result, {
             dataClass: $.pivotUtilities.SubtotalPivotData,
-            rows: ["校區","建築物","用電年"],
+            rows: ["校區", "建築物", "用電年"],
             cols: ["用電月"],
             aggregator: aggregator,
             sorters: {
