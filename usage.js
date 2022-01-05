@@ -620,7 +620,7 @@ Papa.parse('usage.txt', {
     skipEmptyLines: true,
     complete: function (r) {
         results = r.data;
-        與去年相比();
+        //與去年相比();
     }
 })
 
@@ -651,6 +651,7 @@ Papa.parse('meter.txt', {
     skipEmptyLines: true,
     complete: function (r) {
         mresults = r.data;
+        MeterThisYear();
     }
 })
 function MeterThisYear() {
@@ -658,8 +659,10 @@ function MeterThisYear() {
     for (let ii = 0; ii < mresults.length; ii++) {
         for (let i = 1; i < Object.keys(mresults[0]).length; i++) {
             ary.push({
-                用電年: moment(mresults[ii].DataTimeStamp).format('YYYY') - 1911 + '年',
-                用電月: moment(mresults[ii].DataTimeStamp).format('M月'),
+                //用電年: moment(mresults[ii].DataTimeStamp).format('YYYY') - 1911 + '年',
+               //用電月: moment(mresults[ii].DataTimeStamp).format('M月'),
+                帳單年: moment(mresults[ii].DataTimeStamp).add(1,'month').format('YYYY') - 1911 + '年',
+                帳單月: moment(mresults[ii].DataTimeStamp).add(1,'month').format('M月'),
                 DeviceID: Object.keys(mresults[ii])[i],
                 建築物: meterprop.find(e => e.DeviceID == Object.keys(mresults[ii])[i]).MeterName,
                 校區: meterprop.find(e => e.DeviceID == Object.keys(mresults[ii])[i]).area,
@@ -669,9 +672,9 @@ function MeterThisYear() {
     }
     result = JSON.parse(JSON.stringify(ary));
     result = result.filter(list => !meterexcludelist.includes(list.DeviceID));
-    result = result.filter(e=>e.用電年=='110年');
+    result = result.filter(e=>e.帳單年==moment().format('YYYY')-1911+'年');
     
-    let month1 = Math.max(...[...new Set(result.filter(e => e.用電年 == year + '年').map(e => e.用電月.replace('月', '')))]);
+    let month1 = Math.max(...[...new Set(result.filter(e => e.帳單年 == year + '年').map(e => e.帳單月.replace('月', '')))]);
     document.querySelector('#head').innerText = `國立嘉義大學能源管理系統各棟建築物用電情形${month1!=1?`(1月至${month1}月)`:'(1月)'}`;
     var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
     var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["MonthUsageDegree"]);
@@ -682,56 +685,7 @@ function MeterThisYear() {
     $("#output")
         .pivot(result, {
             dataClass: $.pivotUtilities.SubtotalPivotData,
-            rows: ["校區", "建築物", "用電年"],
-            cols: ["用電月"],
-            aggregator: aggregator,
-            sorters: {
-                "校區": sortAs(["蘭潭", "民雄", "新民"]),
-                //"帳單年": sortAs(["109年","108年"]),
-                //"帳單月":sortAs(["1月","2月","3月","4月", "5月","6月","7月","8月","9月","10月","11月","12月"])
-            },
-            renderer: renderer,
-            renderers: $.extend(
-                $.pivotUtilities.renderers,
-                $.pivotUtilities.plotly_renderers,
-                $.pivotUtilities.export_renderers
-            ),
-            rendererOptions: {
-                rowSubtotalDisplay: {
-                    disableAfter: 1
-                },
-                colSubtotalDisplay: {
-                    disableAfter: 1
-                },
-                /*heatmap: {
-                    colorScaleGenerator: function(values) {
-                        // Plotly happens to come with d3 on board
-                        return Plotly.d3.scale.linear()
-                            .domain([0, 10000, 100000])
-                            .range(["#77F", "#FFF", "#F77"])
-                    }
-                }*/
-            }
-        });
-}
-function 今年() {
-    let month1=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
-    document.querySelector('#head').innerText=`國立嘉義大學自設電錶今年度各棟建築物用電情形${month1!=1?`(1月至${month1}月)`:'(1月)'}`;
-    result = JSON.parse(JSON.stringify(results));
-    var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
-    var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["總用電度"]);
-    var sortAs = $.pivotUtilities.sortAs
-    result = result.filter(word => word['帳單年'] == year);
-    result.forEach(function (element, index) {
-        element["帳單月"] = element["帳單月"] + "月";
-        element["公開報表序號"] = element["公開報表序號"] + " " + element["用電建築物"];
-        element["帳單年"] = element["帳單年"] + "年";
-    })
-
-    $("#output")
-        .pivot(result, {
-            dataClass: $.pivotUtilities.SubtotalPivotData,
-            rows: ["校區", "公開報表序號"],
+            rows: ["校區", "建築物", "帳單年"],
             cols: ["帳單月"],
             aggregator: aggregator,
             sorters: {
@@ -763,145 +717,45 @@ function 今年() {
             }
         });
 }
-function 與去年相比() {
-    let month1=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
-    document.querySelector('#head').innerText=`國立嘉義大學自設電錶各棟建築物用電情形與去年相比${month!=1?`(1月至${month1}月)`:'(1月)'}`;
-    let filtermonth=[];for (let i = 1; i <= month1; i++) {filtermonth.push(i+'月')};
-    let filteryear=[0,-1].map(e=>e+year+'年');
-    result = JSON.parse(JSON.stringify(results));   
-    var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
-    var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["總用電度"]);
-    var sortAs = $.pivotUtilities.sortAs
-    result.forEach(function (element, index) {
-        element["帳單月"] = element["帳單月"] + "月";
-        element["公開報表序號"] = element["公開報表序號"] + " " + element["用電建築物"];
-        element["帳單年"] = element["帳單年"] + "年";
-    })
-    result = result.filter(e=>filteryear.includes(e.帳單年));
-    result = result.filter(e=>filtermonth.includes(e.帳單月));
-    $("#output")
-        .pivot(result, {
-            dataClass: $.pivotUtilities.SubtotalPivotData,
-            rows: ["校區", "公開報表序號", "帳單年"],
-            cols: ["帳單月"],
-            aggregator: aggregator,
-            sorters: {
-                "校區": sortAs(["蘭潭", "民雄", "新民"]),
-                //"帳單年": sortAs(["109年","108年"]),
-                //"帳單月":sortAs(["1月","2月","3月","4月", "5月","6月","7月","8月","9月","10月","11月","12月"])
-            },
-            renderer: renderer,
-            renderers: $.extend(
-                $.pivotUtilities.renderers,
-                $.pivotUtilities.plotly_renderers,
-                $.pivotUtilities.export_renderers
-            ),
-            rendererOptions: {
-                rowSubtotalDisplay: {
-                    disableAfter: 1
-                },
-                colSubtotalDisplay: {
-                    disableAfter: 1
-                },
-                /*heatmap: {
-                    colorScaleGenerator: function(values) {
-                        // Plotly happens to come with d3 on board
-                        return Plotly.d3.scale.linear()
-                            .domain([0, 10000, 100000])
-                            .range(["#77F", "#FFF", "#F77"])
-                    }
-                }*/
-            }
-        });
-}
-function 同期排行() {       
-    let month=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
-    let filteryear=[0,-1].map(e=>e+year);    
-    document.querySelector('#head').innerText=`國立嘉義大學自設電錶同期(${filteryear[0]}年${month}月及${filteryear[1]}年${month}月)比較`;
-    result = results.filter(e=>filteryear.includes(e.帳單年));   
-    result = results.filter(e =>  e.帳單月 == month);
-     
-    result = JSON.parse(JSON.stringify(result));
-    ro = Array.from(
-        new Set(
-            result.map(e => e['公開報表序號'])))
-    result = ro.map(e1 => {
-        a = {};
-        r1 = results.filter(e => e['公開報表序號'] == e1 && e['帳單年'] === lastyear && e['帳單月'] === month)[0];
-        r11 = r1['總用電度'];
-        r2 = results.filter(e => e['公開報表序號'] == e1 && e['帳單年'] === year && e['帳單月'] === month)[0];
-        r21 = r2['總用電度'];        
-        r3 = r2['用電建築物'];
-        //a[r3]=r;
-        a['校區'] = r2['校區'];
-        a['公開報表序號'] = r2['公開報表序號'];
-        a['用電建築物'] = r2['用電建築物'];
-        a['本月用電量'] = r21;
-        a['去年同期用電量'] = r11;       
-        if (r11 != 0&&r11 != 'None') {
-            a['增減用電量百分比'] = Math.round(((r21 / r11) - 1) * 10000)/100;
-            a['增減用電量'] = r21 - r11;
-        } else {
-            a['增減用電量百分比'] = "None";
-            a['增減用電量'] = "None";
+function MeterAll() {
+    let ary = [];
+    mresults1=mresults.filter(e=>!['2020-11-01'].includes(e.DataTimeStamp));
+    for (let ii = 0; ii < mresults1.length; ii++) {
+        for (let i = 1; i < Object.keys(mresults1[0]).length; i++) {
+            ary.push({
+                //用電年: moment(mresults1[ii].DataTimeStamp).format('YYYY') - 1911 + '年',
+               //用電月: moment(mresults1[ii].DataTimeStamp).format('M月'),
+                帳單年: moment(mresults1[ii].DataTimeStamp).add(1,'month').format('YYYY') - 1911 + '年',
+                帳單月: moment(mresults1[ii].DataTimeStamp).add(1,'month').format('M月'),
+                DeviceID: Object.keys(mresults1[ii])[i],
+                建築物: meterprop.find(e => e.DeviceID == Object.keys(mresults1[ii])[i]).MeterName,
+                校區: meterprop.find(e => e.DeviceID == Object.keys(mresults1[ii])[i]).area,
+                MonthUsageDegree: mresults1[ii][Object.keys(mresults1[ii])[i]],
+            })
         }
-        return a;
-    })
-    result=result.filter(e=>e['增減用電量百分比']!="None");
-    //result=alasql("select * from ? ORDER BY [增減用電量百分比] DESC ",[result]);
-    //var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
-    //var aggregator = $.pivotUtilities.aggregators["First"](["增減用電量百分比"]);
-    var sortAs = $.pivotUtilities.sortAs    
+    }
+    result = JSON.parse(JSON.stringify(ary));
+    result = result.filter(list => !meterexcludelist.includes(list.DeviceID));
+    
+    
+    let month1 = Math.max(...[...new Set(result.filter(e => e.帳單年 == year + '年').map(e => e.帳單月.replace('月', '')))]);
+    document.querySelector('#head').innerText = `國立嘉義大學能源管理系統各棟建築物所有年度用電情形`;
+    var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
+    var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["MonthUsageDegree"]);
+    var sortAs = $.pivotUtilities.sortAs
+    //result = result.filter(word => word['帳單年'] == year);
+
 
     $("#output")
         .pivot(result, {
             dataClass: $.pivotUtilities.SubtotalPivotData,
-            rows: ["增減用電量百分比","公開報表序號","用電建築物","本月用電量","去年同期用電量","增減用電量"],
-            //cols: ["帳單月"],
-            //aggregator: aggregator,
-            sorters: {
-                "增減用電量百分比": function(a,b){ return b-a; } ,
-                //"帳單年": sortAs(["109年","108年"]),
-                //"帳單月":sortAs(["1月","2月","3月","4月", "5月","6月","7月","8月","9月","10月","11月","12月"])
-            },                  
-            renderers: $.extend(
-                $.pivotUtilities.renderers,
-                $.pivotUtilities.plotly_renderers,
-                $.pivotUtilities.export_renderers
-            ),
-  
-        });
-    //$('.pvtTotalLabel.pvtRowTotalLabel').text("增減用電量百分比(%)");
-    //$('.pvtTotalLabel.pvtColTotalLabel').parent().css('display','none');
-    $('.pvtTotal').css('display','none');
-    $('.pvtTotalLabel').css('display','none');
-    $('.pvtGrandTotal').css('display','none');
-}
-function 近5年度() {
-    let month=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
-    document.querySelector('#head').innerText=`國立嘉義大學自設電錶近5年度各棟建築物用電情形${month!=1?`(1月至${month}月)`:'(1月)'}`;
-    let filtermonth=[];for (let i = 1; i <= month; i++) {filtermonth.push(i+'月')};
-    let filteryear=[0,-1,-2,-3,-4].map(e=>e+year+'年');
-    result = JSON.parse(JSON.stringify(results));
-    var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
-    var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["總用電度"]);
-    var sortAs = $.pivotUtilities.sortAs;
-    //result = result.filter(word => word['帳單年'] == year | word['帳單年'] == year - 1 | word['帳單年'] == year - 2 | word['帳單年'] == year - 3 | word['帳單年'] == year - 4);
-    result.forEach(function (element, index) {
-        element["帳單月"] = element["帳單月"] + "月";
-        element["公開報表序號"] = element["公開報表序號"] + " " + element["用電建築物"];
-        element["帳單年"] = element["帳單年"] + "年";
-    })
-    result = result.filter(e=>filteryear.includes(e.帳單年));
-    result = result.filter(e=>filtermonth.includes(e.帳單月));
-    $("#output")
-        .pivot(result, {
-            dataClass: $.pivotUtilities.SubtotalPivotData,
-            rows: ["校區", "公開報表序號", "帳單年"],
+            rows: ["校區", "建築物", "帳單年"],
             cols: ["帳單月"],
             aggregator: aggregator,
             sorters: {
                 "校區": sortAs(["蘭潭", "民雄", "新民"]),
+                //"帳單年": sortAs(["109年","108年"]),
+                //"帳單月":sortAs(["1月","2月","3月","4月", "5月","6月","7月","8月","9月","10月","11月","12月"])
             },
             renderer: renderer,
             renderers: $.extend(
@@ -914,23 +768,299 @@ function 近5年度() {
                     disableAfter: 1
                 },
                 colSubtotalDisplay: {
-                    disableAfter: 0
+                    disableAfter: 1
                 },
-
+                /*heatmap: {
+                    colorScaleGenerator: function(values) {
+                        // Plotly happens to come with d3 on board
+                        return Plotly.d3.scale.linear()
+                            .domain([0, 10000, 100000])
+                            .range(["#77F", "#FFF", "#F77"])
+                    }
+                }*/
             }
         });
 }
+function MeterRaw() {
+    let ary = [];
+    for (let ii = 0; ii < mresults.length; ii++) {
+        for (let i = 1; i < Object.keys(mresults[0]).length; i++) {
+            ary.push({
+                //用電年: moment(mresults[ii].DataTimeStamp).format('YYYY') - 1911 + '年',
+               //用電月: moment(mresults[ii].DataTimeStamp).format('M月'),
+                帳單年: moment(mresults[ii].DataTimeStamp).add(1,'month').format('YYYY') - 1911 + '年',
+                帳單月: moment(mresults[ii].DataTimeStamp).add(1,'month').format('M月'),
+                DeviceID: Object.keys(mresults[ii])[i],
+                建築物: meterprop.find(e => e.DeviceID == Object.keys(mresults[ii])[i]).MeterName,
+                校區: meterprop.find(e => e.DeviceID == Object.keys(mresults[ii])[i]).area,
+                MonthUsageDegree: mresults[ii][Object.keys(mresults[ii])[i]],
+            })
+        }
+    }
+    result = JSON.parse(JSON.stringify(ary));
+    result = result.filter(list => !meterexcludelist.includes(list.DeviceID));
+    result = result.filter(e=>e.帳單年=='110年');
+    
+    let month1 = Math.max(...[...new Set(result.filter(e => e.帳單年 == year + '年').map(e => e.帳單月.replace('月', '')))]);
+    document.querySelector('#head').innerText = `國立嘉義大學能源管理系統各棟建築物用電情形${month1!=1?`(1月至${month1}月)`:'(1月)'}`;
+    var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
+    var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["MonthUsageDegree"]);
+    var sortAs = $.pivotUtilities.sortAs
+    //result = result.filter(word => word['帳單年'] == year);
+
+
+    $("#output")
+        .pivotUI(result, {
+            dataClass: $.pivotUtilities.SubtotalPivotData,
+            rows: ["校區", "建築物", "帳單年"],
+            cols: ["帳單月"],
+            aggregator: aggregator,
+            sorters: {
+                "校區": sortAs(["蘭潭", "民雄", "新民"]),
+                //"帳單年": sortAs(["109年","108年"]),
+                //"帳單月":sortAs(["1月","2月","3月","4月", "5月","6月","7月","8月","9月","10月","11月","12月"])
+            },
+            renderer: renderer,
+            renderers: $.extend(
+                $.pivotUtilities.renderers,
+                $.pivotUtilities.plotly_renderers,
+                $.pivotUtilities.export_renderers
+            ),
+            rendererOptions: {
+                rowSubtotalDisplay: {
+                    disableAfter: 1
+                },
+                colSubtotalDisplay: {
+                    disableAfter: 1
+                },
+                /*heatmap: {
+                    colorScaleGenerator: function(values) {
+                        // Plotly happens to come with d3 on board
+                        return Plotly.d3.scale.linear()
+                            .domain([0, 10000, 100000])
+                            .range(["#77F", "#FFF", "#F77"])
+                    }
+                }*/
+            }
+        });
+}
+// function 今年() {
+//     let month1=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
+//     document.querySelector('#head').innerText=`國立嘉義大學自設電錶今年度各棟建築物用電情形${month1!=1?`(1月至${month1}月)`:'(1月)'}`;
+//     result = JSON.parse(JSON.stringify(results));
+//     var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
+//     var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["總用電度"]);
+//     var sortAs = $.pivotUtilities.sortAs
+//     result = result.filter(word => word['帳單年'] == year);
+//     result.forEach(function (element, index) {
+//         element["帳單月"] = element["帳單月"] + "月";
+//         element["公開報表序號"] = element["公開報表序號"] + " " + element["用電建築物"];
+//         element["帳單年"] = element["帳單年"] + "年";
+//     })
+
+//     $("#output")
+//         .pivot(result, {
+//             dataClass: $.pivotUtilities.SubtotalPivotData,
+//             rows: ["校區", "公開報表序號"],
+//             cols: ["帳單月"],
+//             aggregator: aggregator,
+//             sorters: {
+//                 "校區": sortAs(["蘭潭", "民雄", "新民"]),
+//                 //"帳單年": sortAs(["109年","108年"]),
+//                 //"帳單月":sortAs(["1月","2月","3月","4月", "5月","6月","7月","8月","9月","10月","11月","12月"])
+//             },
+//             renderer: renderer,
+//             renderers: $.extend(
+//                 $.pivotUtilities.renderers,
+//                 $.pivotUtilities.plotly_renderers,
+//                 $.pivotUtilities.export_renderers
+//             ),
+//             rendererOptions: {
+//                 rowSubtotalDisplay: {
+//                     disableAfter: 1
+//                 },
+//                 colSubtotalDisplay: {
+//                     disableAfter: 1
+//                 },
+//                 /*heatmap: {
+//                     colorScaleGenerator: function(values) {
+//                         // Plotly happens to come with d3 on board
+//                         return Plotly.d3.scale.linear()
+//                             .domain([0, 10000, 100000])
+//                             .range(["#77F", "#FFF", "#F77"])
+//                     }
+//                 }*/
+//             }
+//         });
+// }
+// function 與去年相比() {
+//     let month1=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
+//     document.querySelector('#head').innerText=`國立嘉義大學自設電錶各棟建築物用電情形與去年相比${month!=1?`(1月至${month1}月)`:'(1月)'}`;
+//     let filtermonth=[];for (let i = 1; i <= month1; i++) {filtermonth.push(i+'月')};
+//     let filteryear=[0,-1].map(e=>e+year+'年');
+//     result = JSON.parse(JSON.stringify(results));   
+//     var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
+//     var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["總用電度"]);
+//     var sortAs = $.pivotUtilities.sortAs
+//     result.forEach(function (element, index) {
+//         element["帳單月"] = element["帳單月"] + "月";
+//         element["公開報表序號"] = element["公開報表序號"] + " " + element["用電建築物"];
+//         element["帳單年"] = element["帳單年"] + "年";
+//     })
+//     result = result.filter(e=>filteryear.includes(e.帳單年));
+//     result = result.filter(e=>filtermonth.includes(e.帳單月));
+//     $("#output")
+//         .pivot(result, {
+//             dataClass: $.pivotUtilities.SubtotalPivotData,
+//             rows: ["校區", "公開報表序號", "帳單年"],
+//             cols: ["帳單月"],
+//             aggregator: aggregator,
+//             sorters: {
+//                 "校區": sortAs(["蘭潭", "民雄", "新民"]),
+//                 //"帳單年": sortAs(["109年","108年"]),
+//                 //"帳單月":sortAs(["1月","2月","3月","4月", "5月","6月","7月","8月","9月","10月","11月","12月"])
+//             },
+//             renderer: renderer,
+//             renderers: $.extend(
+//                 $.pivotUtilities.renderers,
+//                 $.pivotUtilities.plotly_renderers,
+//                 $.pivotUtilities.export_renderers
+//             ),
+//             rendererOptions: {
+//                 rowSubtotalDisplay: {
+//                     disableAfter: 1
+//                 },
+//                 colSubtotalDisplay: {
+//                     disableAfter: 1
+//                 },
+//                 /*heatmap: {
+//                     colorScaleGenerator: function(values) {
+//                         // Plotly happens to come with d3 on board
+//                         return Plotly.d3.scale.linear()
+//                             .domain([0, 10000, 100000])
+//                             .range(["#77F", "#FFF", "#F77"])
+//                     }
+//                 }*/
+//             }
+//         });
+// }
+// function 同期排行() {       
+//     let month=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
+//     let filteryear=[0,-1].map(e=>e+year);    
+//     document.querySelector('#head').innerText=`國立嘉義大學自設電錶同期(${filteryear[0]}年${month}月及${filteryear[1]}年${month}月)比較`;
+//     result = results.filter(e=>filteryear.includes(e.帳單年));   
+//     result = results.filter(e =>  e.帳單月 == month);
+     
+//     result = JSON.parse(JSON.stringify(result));
+//     ro = Array.from(
+//         new Set(
+//             result.map(e => e['公開報表序號'])))
+//     result = ro.map(e1 => {
+//         a = {};
+//         r1 = results.filter(e => e['公開報表序號'] == e1 && e['帳單年'] === lastyear && e['帳單月'] === month)[0];
+//         r11 = r1['總用電度'];
+//         r2 = results.filter(e => e['公開報表序號'] == e1 && e['帳單年'] === year && e['帳單月'] === month)[0];
+//         r21 = r2['總用電度'];        
+//         r3 = r2['用電建築物'];
+//         //a[r3]=r;
+//         a['校區'] = r2['校區'];
+//         a['公開報表序號'] = r2['公開報表序號'];
+//         a['用電建築物'] = r2['用電建築物'];
+//         a['本月用電量'] = r21;
+//         a['去年同期用電量'] = r11;       
+//         if (r11 != 0&&r11 != 'None') {
+//             a['增減用電量百分比'] = Math.round(((r21 / r11) - 1) * 10000)/100;
+//             a['增減用電量'] = r21 - r11;
+//         } else {
+//             a['增減用電量百分比'] = "None";
+//             a['增減用電量'] = "None";
+//         }
+//         return a;
+//     })
+//     result=result.filter(e=>e['增減用電量百分比']!="None");
+//     //result=alasql("select * from ? ORDER BY [增減用電量百分比] DESC ",[result]);
+//     //var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
+//     //var aggregator = $.pivotUtilities.aggregators["First"](["增減用電量百分比"]);
+//     var sortAs = $.pivotUtilities.sortAs    
+
+//     $("#output")
+//         .pivot(result, {
+//             dataClass: $.pivotUtilities.SubtotalPivotData,
+//             rows: ["增減用電量百分比","公開報表序號","用電建築物","本月用電量","去年同期用電量","增減用電量"],
+//             //cols: ["帳單月"],
+//             //aggregator: aggregator,
+//             sorters: {
+//                 "增減用電量百分比": function(a,b){ return b-a; } ,
+//                 //"帳單年": sortAs(["109年","108年"]),
+//                 //"帳單月":sortAs(["1月","2月","3月","4月", "5月","6月","7月","8月","9月","10月","11月","12月"])
+//             },                  
+//             renderers: $.extend(
+//                 $.pivotUtilities.renderers,
+//                 $.pivotUtilities.plotly_renderers,
+//                 $.pivotUtilities.export_renderers
+//             ),
+  
+//         });
+//     //$('.pvtTotalLabel.pvtRowTotalLabel').text("增減用電量百分比(%)");
+//     //$('.pvtTotalLabel.pvtColTotalLabel').parent().css('display','none');
+//     $('.pvtTotal').css('display','none');
+//     $('.pvtTotalLabel').css('display','none');
+//     $('.pvtGrandTotal').css('display','none');
+// }
+// function 近5年度() {
+//     let month=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
+//     document.querySelector('#head').innerText=`國立嘉義大學自設電錶近5年度各棟建築物用電情形${month!=1?`(1月至${month}月)`:'(1月)'}`;
+//     let filtermonth=[];for (let i = 1; i <= month; i++) {filtermonth.push(i+'月')};
+//     let filteryear=[0,-1,-2,-3,-4].map(e=>e+year+'年');
+//     result = JSON.parse(JSON.stringify(results));
+//     var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
+//     var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["總用電度"]);
+//     var sortAs = $.pivotUtilities.sortAs;
+//     //result = result.filter(word => word['帳單年'] == year | word['帳單年'] == year - 1 | word['帳單年'] == year - 2 | word['帳單年'] == year - 3 | word['帳單年'] == year - 4);
+//     result.forEach(function (element, index) {
+//         element["帳單月"] = element["帳單月"] + "月";
+//         element["公開報表序號"] = element["公開報表序號"] + " " + element["用電建築物"];
+//         element["帳單年"] = element["帳單年"] + "年";
+//     })
+//     result = result.filter(e=>filteryear.includes(e.帳單年));
+//     result = result.filter(e=>filtermonth.includes(e.帳單月));
+//     $("#output")
+//         .pivot(result, {
+//             dataClass: $.pivotUtilities.SubtotalPivotData,
+//             rows: ["校區", "公開報表序號", "帳單年"],
+//             cols: ["帳單月"],
+//             aggregator: aggregator,
+//             sorters: {
+//                 "校區": sortAs(["蘭潭", "民雄", "新民"]),
+//             },
+//             renderer: renderer,
+//             renderers: $.extend(
+//                 $.pivotUtilities.renderers,
+//                 $.pivotUtilities.plotly_renderers,
+//                 $.pivotUtilities.export_renderers
+//             ),
+//             rendererOptions: {
+//                 rowSubtotalDisplay: {
+//                     disableAfter: 1
+//                 },
+//                 colSubtotalDisplay: {
+//                     disableAfter: 0
+//                 },
+
+//             }
+//         });
+// }
 function 所有年度() {
-    let month=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
-    let filtermonth=[];for (let i = 1; i <= month; i++) {filtermonth.push(i+'月')};
+    //let month=Math.max(...[...new Set(results.filter(e=>e.帳單年==year).map(e=>e.帳單月))]);
+    //let filtermonth=[];for (let i = 1; i <= month; i++) {filtermonth.push(i+'月')};
     result = JSON.parse(JSON.stringify(results));
     result.forEach(function (element, index) {
         element["帳單月"] = element["帳單月"] + "月";
         element["公開報表序號"] = element["公開報表序號"] + " " + element["用電建築物"];
         element["帳單年"] = element["帳單年"] + "年";
     })
-    result = result.filter(e=>filtermonth.includes(e.帳單月));
-    document.querySelector('#head').innerText=`國立嘉義大學自設電錶所有年度各棟建築物用電情形${month!=1?`(1月至${month}月)`:'(1月)'}`;
+    //result = result.filter(e=>filtermonth.includes(e.帳單月));
+    document.querySelector('#head').innerText=`國立嘉義大學自設電錶所有年度各棟建築物用電情形`;
     var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
     var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["總用電度"]);
     var sortAs = $.pivotUtilities.sortAs
