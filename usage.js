@@ -1,136 +1,136 @@
 var time = new Date();
 const year = time.getFullYear() - 1911;
 const lastyear = year - 1;
-var month = time.getMonth()+1;
+var month = time.getMonth() + 1;
 //document.getElementById('btn1').innerText =year+ '年用電情形';
-const IDs= ['09-55-6206-20-0', '09-55-6206-00-6', '09-18-5706-95-7', '09-16-6291-00-2', '09-05-7116-00-8', '09-05-7116-10-0', '09-18-5706-92-4', '09-16-6190-13-5', '09-16-6190-00-0'];
-const waterexcludelist=['51-06329700-9'];
-const meterexcludelist=['000002','000003','000004',''];
-const tpwrprop=[
+const IDs = ['09-55-6206-20-0', '09-55-6206-00-6', '09-18-5706-95-7', '09-16-6291-00-2', '09-05-7116-00-8', '09-05-7116-10-0', '09-18-5706-92-4', '09-16-6190-13-5', '09-16-6190-00-0'];
+const waterexcludelist = ['51-06329700-9'];
+const meterexcludelist = ['000002', '000003', '000004', ''];
+const tpwrprop = [
     {
-      "電號": "09-16-6190-00-0",
-      "電號別名": "蘭潭教學行政區",
-      "校區": "蘭潭"
+        "電號": "09-16-6190-00-0",
+        "電號別名": "蘭潭教學行政區",
+        "校區": "蘭潭"
     },
     {
-      "電號": "09-16-6190-13-5",
-      "電號別名": "蘭潭畜牧場區",
-      "校區": "蘭潭"
+        "電號": "09-16-6190-13-5",
+        "電號別名": "蘭潭畜牧場區",
+        "校區": "蘭潭"
     },
     {
-      "電號": "09-16-6291-00-2",
-      "電號別名": "蘭潭宿舍區",
-      "校區": "蘭潭"
+        "電號": "09-16-6291-00-2",
+        "電號別名": "蘭潭宿舍區",
+        "校區": "蘭潭"
     },
     {
-      "電號": "09-55-6206-00-6",
-      "電號別名": "民雄主校區",
-      "校區": "民雄"
+        "電號": "09-55-6206-00-6",
+        "電號別名": "民雄主校區",
+        "校區": "民雄"
     },
     {
-      "電號": "09-55-6206-20-0",
-      "電號別名": "民雄大學館創意樓",
-      "校區": "民雄"
+        "電號": "09-55-6206-20-0",
+        "電號別名": "民雄大學館創意樓",
+        "校區": "民雄"
     },
     {
-      "電號": "09-05-7116-00-8",
-      "電號別名": "林森主校區",
-      "校區": "林森"
+        "電號": "09-05-7116-00-8",
+        "電號別名": "林森主校區",
+        "校區": "林森"
     },
     {
-      "電號": "09-05-7116-10-0",
-      "電號別名": "林森樂育堂",
-      "校區": "林森"
+        "電號": "09-05-7116-10-0",
+        "電號別名": "林森樂育堂",
+        "校區": "林森"
     },
     {
-      "電號": "09-18-5706-95-7",
-      "電號別名": "新民主校區",
-      "校區": "新民"
+        "電號": "09-18-5706-95-7",
+        "電號別名": "新民主校區",
+        "校區": "新民"
     },
     {
-      "電號": "09-18-5706-92-4",
-      "電號別名": "新民動物醫院及泳池區",
-      "校區": "新民"
+        "電號": "09-18-5706-92-4",
+        "電號別名": "新民動物醫院及泳池區",
+        "校區": "新民"
     },
     {
-      "電號": "09-30-6631-08-9",
-      "電號別名": "社口林場10號",
-      "校區": "社口"
+        "電號": "09-30-6631-08-9",
+        "電號別名": "社口林場10號",
+        "校區": "社口"
     },
     {
-      "電號": "09-30-6631-05-6",
-      "電號別名": "社口林場10-1號",
-      "校區": "社口"
+        "電號": "09-30-6631-05-6",
+        "電號別名": "社口林場10-1號",
+        "校區": "社口"
     },
     {
-      "電號": "09-11-5365-00-4",
-      "電號別名": "忠義街首長宿舍",
-      "校區": "宿舍"
+        "電號": "09-11-5365-00-4",
+        "電號別名": "忠義街首長宿舍",
+        "校區": "宿舍"
     },
     {
-      "電號": "09-16-8246-20-4",
-      "電號別名": "八掌段803-1地號",
-      "校區": "未知"
+        "電號": "09-16-8246-20-4",
+        "電號別名": "八掌段803-1地號",
+        "校區": "未知"
     },
     {
-      "電號": "09-16-8355-20-7",
-      "電號別名": "短竹段999-37地號",
-      "校區": "未知"
+        "電號": "09-16-8355-20-7",
+        "電號別名": "短竹段999-37地號",
+        "校區": "未知"
     }
-  ];
-const waterprop=[
+];
+const waterprop = [
     {
-      "校區": "蘭潭",
-      "供水區": "蘭潭主校區",
-      "水號": "51-18000201-5"
+        "校區": "蘭潭",
+        "供水區": "蘭潭主校區",
+        "水號": "51-18000201-5"
     },
     {
-      "校區": "蘭潭",
-      "供水區": "蘭潭能源系、育成中心",
-      "水號": "51-18025522-8"
+        "校區": "蘭潭",
+        "供水區": "蘭潭能源系、育成中心",
+        "水號": "51-18025522-8"
     },
     {
-      "校區": "蘭潭",
-      "供水區": "蘭潭宿舍1、2舍及昆蟲、咖啡、綠建築",
-      "水號": "51-18000200-K"
+        "校區": "蘭潭",
+        "供水區": "蘭潭宿舍1、2舍及昆蟲、咖啡、綠建築",
+        "水號": "51-18000200-K"
     },
     {
-      "校區": "蘭潭",
-      "供水區": "蘭潭宿舍2、3、5、6舍",
-      "水號": "51-18000100-6"
+        "校區": "蘭潭",
+        "供水區": "蘭潭宿舍2、3、5、6舍",
+        "水號": "51-18000100-6"
     },
     {
-      "校區": "民雄",
-      "供水區": "民雄全校區",
-      "水號": "5Y-24001800-5"
+        "校區": "民雄",
+        "供水區": "民雄全校區",
+        "水號": "5Y-24001800-5"
     },
     {
-      "校區": "林森",
-      "供水區": "林森全校區",
-      "水號": "51-03000800-2"
+        "校區": "林森",
+        "供水區": "林森全校區",
+        "水號": "51-03000800-2"
     },
     {
-      "校區": "新民",
-      "供水區": "新民管院及宿舍",
-      "水號": "51-30963840-0"
+        "校區": "新民",
+        "供水區": "新民管院及宿舍",
+        "水號": "51-30963840-0"
     },
     {
-      "校區": "新民",
-      "供水區": "新民動物醫院",
-      "水號": "51-19326740-5"
+        "校區": "新民",
+        "供水區": "新民動物醫院",
+        "水號": "51-19326740-5"
     },
     {
-      "校區": "新民",
-      "供水區": "新民游泳池",
-      "水號": "51-19326735-8"
+        "校區": "新民",
+        "供水區": "新民游泳池",
+        "水號": "51-19326735-8"
     },
     {
-      "校區": "首長宿舍",
-      "供水區": "忠義街首長宿舍",
-      "水號": "51-06329700-9"
+        "校區": "首長宿舍",
+        "供水區": "忠義街首長宿舍",
+        "水號": "51-06329700-9"
     }
-  ];
-const meterprop=[
+];
+const meterprop = [
     {
         "DeviceID": "D000001",
         "MeterName": "活動中心冰機總盤",
@@ -670,9 +670,9 @@ function MeterThisYear() {
         for (let i = 1; i < Object.keys(mresults[0]).length; i++) {
             ary.push({
                 //用電年: moment(mresults[ii].DataTimeStamp).format('YYYY') - 1911 + '年',
-               //用電月: moment(mresults[ii].DataTimeStamp).format('M月'),
-                帳單年: moment(mresults[ii].DataTimeStamp).add(1,'month').format('YYYY') - 1911 + '年',
-                帳單月: moment(mresults[ii].DataTimeStamp).add(1,'month').format('M月'),
+                //用電月: moment(mresults[ii].DataTimeStamp).format('M月'),
+                帳單年: moment(mresults[ii].DataTimeStamp).add(1, 'month').format('YYYY') - 1911 + '年',
+                帳單月: moment(mresults[ii].DataTimeStamp).add(1, 'month').format('M月'),
                 DeviceID: Object.keys(mresults[ii])[i],
                 建築物: meterprop.find(e => e.DeviceID == Object.keys(mresults[ii])[i]).MeterName,
                 校區: meterprop.find(e => e.DeviceID == Object.keys(mresults[ii])[i]).area,
@@ -682,10 +682,10 @@ function MeterThisYear() {
     }
     result = JSON.parse(JSON.stringify(ary));
     result = result.filter(list => !meterexcludelist.includes(list.DeviceID));
-    result = result.filter(e=>e.帳單年==moment().format('YYYY')-1911+'年');
-    
+    result = result.filter(e => e.帳單年 == moment().format('YYYY') - 1911 + '年');
+
     let month1 = Math.max(...[...new Set(result.filter(e => e.帳單年 == year + '年').map(e => e.帳單月.replace('月', '')))]);
-    document.querySelector('#head').innerText = `國立嘉義大學能源管理系統各棟建築物用電情形${month1!=1?`(1月至${month1}月)`:'(1月)'}`;
+    document.querySelector('#head').innerText = `國立嘉義大學能源管理系統各棟建築物用電情形${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}`;
     var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
     var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["MonthUsageDegree"]);
     var sortAs = $.pivotUtilities.sortAs
@@ -729,14 +729,14 @@ function MeterThisYear() {
 }
 function MeterAll() {
     let ary = [];
-    mresults1=mresults.filter(e=>!['2020-11-01'].includes(e.DataTimeStamp));
+    mresults1 = mresults.filter(e => !['2020-11-01'].includes(e.DataTimeStamp));
     for (let ii = 0; ii < mresults1.length; ii++) {
         for (let i = 1; i < Object.keys(mresults1[0]).length; i++) {
             ary.push({
                 //用電年: moment(mresults1[ii].DataTimeStamp).format('YYYY') - 1911 + '年',
-               //用電月: moment(mresults1[ii].DataTimeStamp).format('M月'),
-                帳單年: moment(mresults1[ii].DataTimeStamp).add(1,'month').format('YYYY') - 1911 + '年',
-                帳單月: moment(mresults1[ii].DataTimeStamp).add(1,'month').format('M月'),
+                //用電月: moment(mresults1[ii].DataTimeStamp).format('M月'),
+                帳單年: moment(mresults1[ii].DataTimeStamp).add(1, 'month').format('YYYY') - 1911 + '年',
+                帳單月: moment(mresults1[ii].DataTimeStamp).add(1, 'month').format('M月'),
                 DeviceID: Object.keys(mresults1[ii])[i],
                 建築物: meterprop.find(e => e.DeviceID == Object.keys(mresults1[ii])[i]).MeterName,
                 校區: meterprop.find(e => e.DeviceID == Object.keys(mresults1[ii])[i]).area,
@@ -746,8 +746,8 @@ function MeterAll() {
     }
     result = JSON.parse(JSON.stringify(ary));
     result = result.filter(list => !meterexcludelist.includes(list.DeviceID));
-    
-    
+
+
     let month1 = Math.max(...[...new Set(result.filter(e => e.帳單年 == year + '年').map(e => e.帳單月.replace('月', '')))]);
     document.querySelector('#head').innerText = `國立嘉義大學能源管理系統各棟建築物所有年度用電情形`;
     var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
@@ -797,9 +797,9 @@ function MeterRaw() {
         for (let i = 1; i < Object.keys(mresults[0]).length; i++) {
             ary.push({
                 //用電年: moment(mresults[ii].DataTimeStamp).format('YYYY') - 1911 + '年',
-               //用電月: moment(mresults[ii].DataTimeStamp).format('M月'),
-                帳單年: moment(mresults[ii].DataTimeStamp).add(1,'month').format('YYYY') - 1911 + '年',
-                帳單月: moment(mresults[ii].DataTimeStamp).add(1,'month').format('M月'),
+                //用電月: moment(mresults[ii].DataTimeStamp).format('M月'),
+                帳單年: moment(mresults[ii].DataTimeStamp).add(1, 'month').format('YYYY') - 1911 + '年',
+                帳單月: moment(mresults[ii].DataTimeStamp).add(1, 'month').format('M月'),
                 DeviceID: Object.keys(mresults[ii])[i],
                 建築物: meterprop.find(e => e.DeviceID == Object.keys(mresults[ii])[i]).MeterName,
                 校區: meterprop.find(e => e.DeviceID == Object.keys(mresults[ii])[i]).area,
@@ -809,10 +809,10 @@ function MeterRaw() {
     }
     result = JSON.parse(JSON.stringify(ary));
     result = result.filter(list => !meterexcludelist.includes(list.DeviceID));
-    result = result.filter(e=>e.帳單年=='110年');
-    
+    //result = result.filter(e => e.帳單年 == '110年');
+
     let month1 = Math.max(...[...new Set(result.filter(e => e.帳單年 == year + '年').map(e => e.帳單月.replace('月', '')))]);
-    document.querySelector('#head').innerText = `國立嘉義大學能源管理系統各棟建築物用電情形${month1!=1?`(1月至${month1}月)`:'(1月)'}`;
+    document.querySelector('#head').innerText = `國立嘉義大學能源管理系統各棟建築物所有年度用電情形`;
     var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
     var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["MonthUsageDegree"]);
     var sortAs = $.pivotUtilities.sortAs
@@ -960,7 +960,7 @@ function MeterRaw() {
 //     document.querySelector('#head').innerText=`國立嘉義大學自設電錶同期(${filteryear[0]}年${month}月及${filteryear[1]}年${month}月)比較`;
 //     result = results.filter(e=>filteryear.includes(e.帳單年));   
 //     result = results.filter(e =>  e.帳單月 == month);
-     
+
 //     result = JSON.parse(JSON.stringify(result));
 //     ro = Array.from(
 //         new Set(
@@ -1009,7 +1009,7 @@ function MeterRaw() {
 //                 $.pivotUtilities.plotly_renderers,
 //                 $.pivotUtilities.export_renderers
 //             ),
-  
+
 //         });
 //     //$('.pvtTotalLabel.pvtRowTotalLabel').text("增減用電量百分比(%)");
 //     //$('.pvtTotalLabel.pvtColTotalLabel').parent().css('display','none');
@@ -1070,7 +1070,7 @@ function 所有年度() {
         element["帳單年"] = element["帳單年"] + "年";
     })
     //result = result.filter(e=>filtermonth.includes(e.帳單月));
-    document.querySelector('#head').innerText=`國立嘉義大學自設電錶所有年度各棟建築物用電情形`;
+    document.querySelector('#head').innerText = `國立嘉義大學自設電錶所有年度各棟建築物用電情形`;
     var renderer = $.pivotUtilities.subtotal_renderers["Table With Subtotal Row Heatmap"];
     var aggregator = $.pivotUtilities.aggregators["Integer Sum"](["總用電度"]);
     var sortAs = $.pivotUtilities.sortAs
@@ -1110,7 +1110,7 @@ function 所有年度() {
         });
 }
 function 自行定義() {
-    document.querySelector('#head').innerText='國立嘉義大學自設電錶各棟建築物用電情形自行定義報表';
+    document.querySelector('#head').innerText = '國立嘉義大學自設電錶各棟建築物用電情形自行定義報表';
     result = JSON.parse(JSON.stringify(results));
     $("#output")
         .pivotUI(result, {
@@ -1122,22 +1122,22 @@ function 自行定義() {
                 $.pivotUtilities.plotly_renderers,
                 $.pivotUtilities.d3_renderers,
                 $.pivotUtilities.export_renderers
-            ),             
+            ),
         })
 }
 
 function 今年用水() {
-    let month1=Math.max(...[...new Set(wresults.filter(e=>new Date(e.繳費年月).getFullYear()-1911==year).map(e=>new Date(e.繳費年月).getMonth()+1))]);
-    document.querySelector('#head').innerText=`國立嘉義大學本年度用水情形${month!=1?`(1月至${month1}月)`:'(1月)'}`;
+    let month1 = Math.max(...[...new Set(wresults.filter(e => new Date(e.繳費年月).getFullYear() - 1911 == year).map(e => new Date(e.繳費年月).getMonth() + 1))]);
+    document.querySelector('#head').innerText = `國立嘉義大學本年度用水情形${month != 1 ? `(1月至${month1}月)` : '(1月)'}`;
     result = JSON.parse(JSON.stringify(wresults));
-    result = result.filter(e=>new Date(e.繳費年月).getFullYear()-1911== year);
-    result.forEach(e=>{
-        e.水費年=new Date(e.繳費年月).getFullYear()-1911+'年';
-        e.水費月=new Date(e.繳費年月).getMonth()+1+'月';
-        e.校區=waterprop.find(e1=>e1.水號==e.水號).校區;
-        e.供水區=waterprop.find(e1=>e1.水號==e.水號).供水區;
+    result = result.filter(e => new Date(e.繳費年月).getFullYear() - 1911 == year);
+    result.forEach(e => {
+        e.水費年 = new Date(e.繳費年月).getFullYear() - 1911 + '年';
+        e.水費月 = new Date(e.繳費年月).getMonth() + 1 + '月';
+        e.校區 = waterprop.find(e1 => e1.水號 == e.水號).校區;
+        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號).供水區;
     });
-    result=result.filter(list=>!waterexcludelist.includes(list.水號));  
+    result = result.filter(list => !waterexcludelist.includes(list.水號));
     $("#output")
         .pivot(result, {
             dataClass: $.pivotUtilities.SubtotalPivotData,
@@ -1164,22 +1164,22 @@ function 今年用水() {
             }
         });
 }
-function 用水與去年相比() {    
-    let month1=Math.max(...[...new Set(wresults.filter(e=>new Date(e.繳費年月).getFullYear()-1911==year).map(e=>new Date(e.繳費年月).getMonth()+1))]);
-    document.querySelector('#head').innerText=`國立嘉義大學本年度用水情形與去年相比${month!=1?`(1月至${month1}月)`:'(1月)'}`;
-    let filtermonth=[];for (let i = 1; i <= month1; i++) {filtermonth.push(i+'月')};
-    let filteryear=[0,-1].map(e=>e+year+'年');
+function 用水與去年相比() {
+    let month1 = Math.max(...[...new Set(wresults.filter(e => new Date(e.繳費年月).getFullYear() - 1911 == year).map(e => new Date(e.繳費年月).getMonth() + 1))]);
+    document.querySelector('#head').innerText = `國立嘉義大學本年度用水情形與去年相比${month != 1 ? `(1月至${month1}月)` : '(1月)'}`;
+    let filtermonth = []; for (let i = 1; i <= month1; i++) { filtermonth.push(i + '月') };
+    let filteryear = [0, -1].map(e => e + year + '年');
     result = JSON.parse(JSON.stringify(wresults));
 
-    result.forEach(e=>{
-        e.水費年=new Date(e.繳費年月).getFullYear()-1911+'年';
-        e.水費月=new Date(e.繳費年月).getMonth()+1+'月';
-        e.校區=waterprop.find(e1=>e1.水號==e.水號).校區;
-        e.供水區=waterprop.find(e1=>e1.水號==e.水號).供水區;
+    result.forEach(e => {
+        e.水費年 = new Date(e.繳費年月).getFullYear() - 1911 + '年';
+        e.水費月 = new Date(e.繳費年月).getMonth() + 1 + '月';
+        e.校區 = waterprop.find(e1 => e1.水號 == e.水號).校區;
+        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號).供水區;
     });
-    result=result.filter(list=>!waterexcludelist.includes(list.水號));  
-    result = result.filter(e=>filteryear.includes(e.水費年));
-    result = result.filter(e=>filtermonth.includes(e.水費月));
+    result = result.filter(list => !waterexcludelist.includes(list.水號));
+    result = result.filter(e => filteryear.includes(e.水費年));
+    result = result.filter(e => filtermonth.includes(e.水費月));
     $("#output")
         .pivot(result, {
             dataClass: $.pivotUtilities.SubtotalPivotData,
@@ -1206,21 +1206,21 @@ function 用水與去年相比() {
             }
         });
 }
-function 近5年度用水() {    
-    let month1=Math.max(...[...new Set(wresults.filter(e=>new Date(e.繳費年月).getFullYear()-1911==year).map(e=>new Date(e.繳費年月).getMonth()+1))]);
-    document.querySelector('#head').innerText=`國立嘉義大學近5年度用水情形${month!=1?`(1月至${month1}月)`:'(1月)'}`;
-    let filtermonth=[];for (let i = 1; i <= month1; i++) {filtermonth.push(i+'月')};
-    let filteryear=[0,-1,-2,-3,-4].map(e=>e+year+'年');
+function 近5年度用水() {
+    let month1 = Math.max(...[...new Set(wresults.filter(e => new Date(e.繳費年月).getFullYear() - 1911 == year).map(e => new Date(e.繳費年月).getMonth() + 1))]);
+    document.querySelector('#head').innerText = `國立嘉義大學近5年度用水情形${month != 1 ? `(1月至${month1}月)` : '(1月)'}`;
+    let filtermonth = []; for (let i = 1; i <= month1; i++) { filtermonth.push(i + '月') };
+    let filteryear = [0, -1, -2, -3, -4].map(e => e + year + '年');
     result = JSON.parse(JSON.stringify(wresults));
-    result.forEach(e=>{
-        e.水費年=new Date(e.繳費年月).getFullYear()-1911+'年';
-        e.水費月=new Date(e.繳費年月).getMonth()+1+'月';
-        e.校區=waterprop.find(e1=>e1.水號==e.水號).校區;
-        e.供水區=waterprop.find(e1=>e1.水號==e.水號).供水區;
+    result.forEach(e => {
+        e.水費年 = new Date(e.繳費年月).getFullYear() - 1911 + '年';
+        e.水費月 = new Date(e.繳費年月).getMonth() + 1 + '月';
+        e.校區 = waterprop.find(e1 => e1.水號 == e.水號).校區;
+        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號).供水區;
     });
-    result=result.filter(list=>!waterexcludelist.includes(list.水號));  
-    result = result.filter(e=>filteryear.includes(e.水費年));
-    result = result.filter(e=>filtermonth.includes(e.水費月));
+    result = result.filter(list => !waterexcludelist.includes(list.水號));
+    result = result.filter(e => filteryear.includes(e.水費年));
+    result = result.filter(e => filtermonth.includes(e.水費月));
     $("#output")
         .pivot(result, {
             dataClass: $.pivotUtilities.SubtotalPivotData,
@@ -1248,18 +1248,18 @@ function 近5年度用水() {
         });
 }
 function 所有年度用水() {
-    let month1=Math.max(...[...new Set(wresults.filter(e=>new Date(e.繳費年月).getFullYear()-1911==year).map(e=>new Date(e.繳費年月).getMonth()+1))]);
-    document.querySelector('#head').innerText=`國立嘉義大學所有年度用水情形${month!=1?`(1月至${month1}月)`:'(1月)'}`;
-    let filtermonth=[];for (let i = 1; i <= month1; i++) {filtermonth.push(i+'月')};
+    let month1 = Math.max(...[...new Set(wresults.filter(e => new Date(e.繳費年月).getFullYear() - 1911 == year).map(e => new Date(e.繳費年月).getMonth() + 1))]);
+    document.querySelector('#head').innerText = `國立嘉義大學所有年度用水情形${month != 1 ? `(1月至${month1}月)` : '(1月)'}`;
+    let filtermonth = []; for (let i = 1; i <= month1; i++) { filtermonth.push(i + '月') };
     result = JSON.parse(JSON.stringify(wresults));
-    result.forEach(e=>{
-        e.水費年=new Date(e.繳費年月).getFullYear()-1911+'年';
-        e.水費月=new Date(e.繳費年月).getMonth()+1+'月';
-        e.校區=waterprop.find(e1=>e1.水號==e.水號).校區;
-        e.供水區=waterprop.find(e1=>e1.水號==e.水號).供水區;
+    result.forEach(e => {
+        e.水費年 = new Date(e.繳費年月).getFullYear() - 1911 + '年';
+        e.水費月 = new Date(e.繳費年月).getMonth() + 1 + '月';
+        e.校區 = waterprop.find(e1 => e1.水號 == e.水號).校區;
+        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號).供水區;
     });
-    result = result.filter(e=>filtermonth.includes(e.水費月));
-    result=result.filter(list=>!waterexcludelist.includes(list.水號));  
+    result = result.filter(e => filtermonth.includes(e.水費月));
+    result = result.filter(list => !waterexcludelist.includes(list.水號));
     $("#output")
         .pivot(result, {
             dataClass: $.pivotUtilities.SubtotalPivotData,
@@ -1288,15 +1288,15 @@ function 所有年度用水() {
 }
 function 用水自行定義() {
     //let month1=Math.max(...[...new Set(wresults.filter(e=>e.水費年==year).map(e=>e.水費月))]);
-    document.querySelector('#head').innerText=`國立嘉義大學近用水情形自行定義報表`;
+    document.querySelector('#head').innerText = `國立嘉義大學近用水情形自行定義報表`;
     result = JSON.parse(JSON.stringify(wresults));
-    result.forEach(e=>{
-        e.水費年=new Date(e.繳費年月).getFullYear()-1911+'年';
-        e.水費月=new Date(e.繳費年月).getMonth()+1+'月';
-        e.校區=waterprop.find(e1=>e1.水號==e.水號).校區;
-        e.供水區=waterprop.find(e1=>e1.水號==e.水號).供水區;
+    result.forEach(e => {
+        e.水費年 = new Date(e.繳費年月).getFullYear() - 1911 + '年';
+        e.水費月 = new Date(e.繳費年月).getMonth() + 1 + '月';
+        e.校區 = waterprop.find(e1 => e1.水號 == e.水號).校區;
+        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號).供水區;
     });
-    
+
     $("#output")
         .pivotUI(result, {
             dataClass: $.pivotUtilities.SubtotalPivotData,
@@ -1325,17 +1325,17 @@ function 用水自行定義() {
 }
 
 function 今年用電() {
-    let month1=Math.max(...[...new Set(tresults.filter(e=>new Date(e.收費月份).getFullYear()-1911==year).map(e=>new Date(e.收費月份).getMonth()+1))]);
-    document.querySelector('#head').innerText=`國立嘉義大學本年度用電情形${month!=1?`(1月至${month1}月)`:'(1月)'}`;
+    let month1 = Math.max(...[...new Set(tresults.filter(e => new Date(e.收費月份).getFullYear() - 1911 == year).map(e => new Date(e.收費月份).getMonth() + 1))]);
+    document.querySelector('#head').innerText = `國立嘉義大學本年度用電情形${month != 1 ? `(1月至${month1}月)` : '(1月)'}`;
     result = JSON.parse(JSON.stringify(tresults));
-    result.forEach(e=>{
-        e.收費年=new Date(e.收費月份).getFullYear()-1911+'年';
-        e.收費月=new Date(e.收費月份).getMonth()+1+'月';
-        e.電號別名=tpwrprop.find(e1=>e1.電號==e.電號).電號別名;
-        e.校區=tpwrprop.find(e1=>e1.電號==e.電號).校區;
+    result.forEach(e => {
+        e.收費年 = new Date(e.收費月份).getFullYear() - 1911 + '年';
+        e.收費月 = new Date(e.收費月份).getMonth() + 1 + '月';
+        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號).電號別名;
+        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號).校區;
     });
-    result=result.filter(list=>IDs.includes(list.電號));   
-    result = result.filter(word => word['收費年'] == year+'年');
+    result = result.filter(list => IDs.includes(list.電號));
+    result = result.filter(word => word['收費年'] == year + '年');
 
     $("#output")
         .pivot(result, {
@@ -1364,20 +1364,20 @@ function 今年用電() {
         });
 }
 function 用電與去年相比() {
-    let month1=Math.max(...[...new Set(tresults.filter(e=>new Date(e.收費月份).getFullYear()-1911==year).map(e=>new Date(e.收費月份).getMonth()+1))]);
-    document.querySelector('#head').innerText=`國立嘉義大學本年度用電情形與去年相比${month!=1?`(1月至${month1}月)`:'(1月)'}`;
-    let filtermonth=[];for (let i = 1; i <= month1; i++) {filtermonth.push(i+'月')};
-    let filteryear=[0,-1].map(e=>e+year+'年');
+    let month1 = Math.max(...[...new Set(tresults.filter(e => new Date(e.收費月份).getFullYear() - 1911 == year).map(e => new Date(e.收費月份).getMonth() + 1))]);
+    document.querySelector('#head').innerText = `國立嘉義大學本年度用電情形與去年相比${month != 1 ? `(1月至${month1}月)` : '(1月)'}`;
+    let filtermonth = []; for (let i = 1; i <= month1; i++) { filtermonth.push(i + '月') };
+    let filteryear = [0, -1].map(e => e + year + '年');
     result = JSON.parse(JSON.stringify(tresults));
-    result.forEach(e=>{
-        e.收費年=new Date(e.收費月份).getFullYear()-1911+'年';
-        e.收費月=new Date(e.收費月份).getMonth()+1+'月';
-        e.電號別名=tpwrprop.find(e1=>e1.電號==e.電號).電號別名;
-        e.校區=tpwrprop.find(e1=>e1.電號==e.電號).校區;
+    result.forEach(e => {
+        e.收費年 = new Date(e.收費月份).getFullYear() - 1911 + '年';
+        e.收費月 = new Date(e.收費月份).getMonth() + 1 + '月';
+        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號).電號別名;
+        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號).校區;
     });
-    result=result.filter(list=>IDs.includes(list.電號));   
-    result = result.filter(e=>filteryear.includes(e.收費年));
-    result = result.filter(e=>filtermonth.includes(e.收費月));
+    result = result.filter(list => IDs.includes(list.電號));
+    result = result.filter(e => filteryear.includes(e.收費年));
+    result = result.filter(e => filtermonth.includes(e.收費月));
     $("#output")
         .pivot(result, {
             dataClass: $.pivotUtilities.SubtotalPivotData,
@@ -1405,20 +1405,20 @@ function 用電與去年相比() {
         });
 }
 function 近5年度用電() {
-    let month1=Math.max(...[...new Set(tresults.filter(e=>new Date(e.收費月份).getFullYear()-1911==year).map(e=>new Date(e.收費月份).getMonth()+1))]);
-    document.querySelector('#head').innerText=`國立嘉義大學近5年度用電情形${month!=1?`(1月至${month1}月)`:'(1月)'}`;
-    let filtermonth=[];for (let i = 1; i <= month1; i++) {filtermonth.push(i+'月')};
-    let filteryear=[0,-1,-2,-3,-4].map(e=>e+year+'年');
+    let month1 = Math.max(...[...new Set(tresults.filter(e => new Date(e.收費月份).getFullYear() - 1911 == year).map(e => new Date(e.收費月份).getMonth() + 1))]);
+    document.querySelector('#head').innerText = `國立嘉義大學近5年度用電情形${month != 1 ? `(1月至${month1}月)` : '(1月)'}`;
+    let filtermonth = []; for (let i = 1; i <= month1; i++) { filtermonth.push(i + '月') };
+    let filteryear = [0, -1, -2, -3, -4].map(e => e + year + '年');
     result = JSON.parse(JSON.stringify(tresults));
-    result.forEach(e=>{
-        e.收費年=new Date(e.收費月份).getFullYear()-1911+'年';
-        e.收費月=new Date(e.收費月份).getMonth()+1+'月';
-        e.電號別名=tpwrprop.find(e1=>e1.電號==e.電號).電號別名;
-        e.校區=tpwrprop.find(e1=>e1.電號==e.電號).校區;
+    result.forEach(e => {
+        e.收費年 = new Date(e.收費月份).getFullYear() - 1911 + '年';
+        e.收費月 = new Date(e.收費月份).getMonth() + 1 + '月';
+        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號).電號別名;
+        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號).校區;
     });
-    result=result.filter(list=>IDs.includes(list.電號));   
-    result = result.filter(e=>filteryear.includes(e.收費年));
-    result = result.filter(e=>filtermonth.includes(e.收費月));
+    result = result.filter(list => IDs.includes(list.電號));
+    result = result.filter(e => filteryear.includes(e.收費年));
+    result = result.filter(e => filtermonth.includes(e.收費月));
 
     $("#output")
         .pivot(result, {
@@ -1447,18 +1447,18 @@ function 近5年度用電() {
         });
 }
 function 所有年度用電() {
-    let month1=Math.max(...[...new Set(tresults.filter(e=>new Date(e.收費月份).getFullYear()-1911==year).map(e=>new Date(e.收費月份).getMonth()+1))]);
-    document.querySelector('#head').innerText=`國立嘉義大學所有年度用電情形${month!=1?`(1月至${month1}月)`:'(1月)'}`;
-    let filtermonth=[];for (let i = 1; i <= month1; i++) {filtermonth.push(i+'月')};
+    let month1 = Math.max(...[...new Set(tresults.filter(e => new Date(e.收費月份).getFullYear() - 1911 == year).map(e => new Date(e.收費月份).getMonth() + 1))]);
+    document.querySelector('#head').innerText = `國立嘉義大學所有年度用電情形${month != 1 ? `(1月至${month1}月)` : '(1月)'}`;
+    let filtermonth = []; for (let i = 1; i <= month1; i++) { filtermonth.push(i + '月') };
     result = JSON.parse(JSON.stringify(tresults));
-    result.forEach(e=>{
-        e.收費年=new Date(e.收費月份).getFullYear()-1911+'年';
-        e.收費月=new Date(e.收費月份).getMonth()+1+'月';
-        e.電號別名=tpwrprop.find(e1=>e1.電號==e.電號).電號別名;
-        e.校區=tpwrprop.find(e1=>e1.電號==e.電號).校區;
+    result.forEach(e => {
+        e.收費年 = new Date(e.收費月份).getFullYear() - 1911 + '年';
+        e.收費月 = new Date(e.收費月份).getMonth() + 1 + '月';
+        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號).電號別名;
+        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號).校區;
     });
-    result=result.filter(list=>IDs.includes(list.電號));   
-    result = result.filter(e=>filtermonth.includes(e.收費月));
+    result = result.filter(list => IDs.includes(list.電號));
+    result = result.filter(e => filtermonth.includes(e.收費月));
 
     $("#output")
         .pivot(result, {
@@ -1487,14 +1487,13 @@ function 所有年度用電() {
         });
 }
 function 用電自行定義() {
-    document.querySelector('#head').innerText=`國立嘉義大學所有年度用電情形自行定義報表`;
-    result = JSON.parse(JSON.stringify(tresults));
-    result.forEach(e=>{
-        e.收費年=new Date(e.收費月份).getFullYear()-1911+'年';
-        e.收費月=new Date(e.收費月份).getMonth()+1+'月';
-        e.電號別名=tpwrprop.find(e1=>e1.電號==e.電號).電號別名;
-        e.校區=tpwrprop.find(e1=>e1.電號==e.電號).校區;
-
+    document.querySelector('#head').innerText = `國立嘉義大學所有年度用電情形自行定義報表`;
+    let result = JSON.parse(JSON.stringify(tresults));
+    result.forEach(e => {
+        e.收費年 = new Date(e.收費月份).getFullYear() - 1911 + '年';
+        e.收費月 = new Date(e.收費月份).getMonth() + 1 + '月';
+        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號).電號別名;
+        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號).校區;
     });
     $("#output")
         .pivotUI(result, {
