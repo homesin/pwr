@@ -802,6 +802,7 @@ function 所有年度用水() {
             }
         });
 }
+
 function 用水自行定義() {
     //let month1=Math.max(...[...new Set(wresults.filter(e=>e.水費年==year).map(e=>e.水費月))]);
     document.querySelector('#head').innerText = `國立嘉義大學近用水情形自行定義報表`;
