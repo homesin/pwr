@@ -650,8 +650,8 @@ function 今年用水() {
     result.forEach(e => {
         e.水費年 = new Date(e.繳費年月).getFullYear() - 1911 + '年';
         e.水費月 = new Date(e.繳費年月).getMonth() + 1 + '月';
-        e.校區 = waterprop.find(e1 => e1.水號 == e.水號).校區;
-        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號).供水區;
+        e.校區 = waterprop.find(e1 => e1.水號 == e.水號)?.校區;
+        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號)?.供水區;
     });
     result = result.filter(list => !waterexcludelist.includes(list.水號));
     $("#output")
@@ -690,8 +690,8 @@ function 用水與去年相比() {
     result.forEach(e => {
         e.水費年 = new Date(e.繳費年月).getFullYear() - 1911 + '年';
         e.水費月 = new Date(e.繳費年月).getMonth() + 1 + '月';
-        e.校區 = waterprop.find(e1 => e1.水號 == e.水號).校區;
-        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號).供水區;
+        e.校區 = waterprop.find(e1 => e1.水號 == e.水號)?.校區;
+        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號)?.供水區;
     });
     result = result.filter(list => !waterexcludelist.includes(list.水號));
     result = result.filter(e => filteryear.includes(e.水費年));
@@ -731,8 +731,8 @@ function 近5年度用水() {
     result.forEach(e => {
         e.水費年 = new Date(e.繳費年月).getFullYear() - 1911 + '年';
         e.水費月 = new Date(e.繳費年月).getMonth() + 1 + '月';
-        e.校區 = waterprop.find(e1 => e1.水號 == e.水號).校區;
-        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號).供水區;
+        e.校區 = waterprop.find(e1 => e1.水號 == e.水號)?.校區;
+        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號)?.供水區;
     });
     result = result.filter(list => !waterexcludelist.includes(list.水號));
     result = result.filter(e => filteryear.includes(e.水費年));
@@ -771,8 +771,8 @@ function 所有年度用水() {
     result.forEach(e => {
         e.水費年 = new Date(e.繳費年月).getFullYear() - 1911 + '年';
         e.水費月 = new Date(e.繳費年月).getMonth() + 1 + '月';
-        e.校區 = waterprop.find(e1 => e1.水號 == e.水號).校區;
-        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號).供水區;
+        e.校區 = waterprop.find(e1 => e1.水號 == e.水號)?.校區;
+        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號)?.供水區;
     });
     result = result.filter(e => filtermonth.includes(e.水費月));
     result = result.filter(list => !waterexcludelist.includes(list.水號));
@@ -809,8 +809,8 @@ function 用水自行定義() {
     result.forEach(e => {
         e.水費年 = new Date(e.繳費年月).getFullYear() - 1911 + '年';
         e.水費月 = new Date(e.繳費年月).getMonth() + 1 + '月';
-        e.校區 = waterprop.find(e1 => e1.水號 == e.水號).校區;
-        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號).供水區;
+        e.校區 = waterprop.find(e1 => e1.水號 == e.水號)?.校區;
+        e.供水區 = waterprop.find(e1 => e1.水號 == e.水號)?.供水區;
     });
 
     $("#output")
@@ -847,8 +847,8 @@ function 今年用電() {
     result.forEach(e => {
         e.收費年 = new Date(e.收費月份).getFullYear() - 1911 + '年';
         e.收費月 = new Date(e.收費月份).getMonth() + 1 + '月';
-        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號).電號別名;
-        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號).校區;
+        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號)?.電號別名;
+        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號)?.校區;
     });
     result = result.filter(list => IDs.includes(list.電號));
     result = result.filter(word => word['收費年'] == year + '年');
@@ -888,8 +888,8 @@ function 用電與去年相比() {
     result.forEach(e => {
         e.收費年 = new Date(e.收費月份).getFullYear() - 1911 + '年';
         e.收費月 = new Date(e.收費月份).getMonth() + 1 + '月';
-        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號).電號別名;
-        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號).校區;
+        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號)?.電號別名;
+        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號)?.校區;
     });
     result = result.filter(list => IDs.includes(list.電號));
     result = result.filter(e => filteryear.includes(e.收費年));
@@ -929,8 +929,8 @@ function 近5年度用電() {
     result.forEach(e => {
         e.收費年 = new Date(e.收費月份).getFullYear() - 1911 + '年';
         e.收費月 = new Date(e.收費月份).getMonth() + 1 + '月';
-        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號).電號別名;
-        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號).校區;
+        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號)?.電號別名;
+        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號)?.校區;
     });
     result = result.filter(list => IDs.includes(list.電號));
     result = result.filter(e => filteryear.includes(e.收費年));
@@ -970,8 +970,8 @@ function 所有年度用電() {
     result.forEach(e => {
         e.收費年 = new Date(e.收費月份).getFullYear() - 1911 + '年';
         e.收費月 = new Date(e.收費月份).getMonth() + 1 + '月';
-        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號).電號別名;
-        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號).校區;
+        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號)?.電號別名;
+        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號)?.校區;
     });
     result = result.filter(list => IDs.includes(list.電號));
     result = result.filter(e => filtermonth.includes(e.收費月));
@@ -1008,8 +1008,8 @@ function 用電自行定義() {
     result.forEach(e => {
         e.收費年 = new Date(e.收費月份).getFullYear() - 1911 + '年';
         e.收費月 = new Date(e.收費月份).getMonth() + 1 + '月';
-        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號).電號別名;
-        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號).校區;
+        e.電號別名 = tpwrprop.find(e1 => e1.電號 == e.電號)?.電號別名;
+        e.校區 = tpwrprop.find(e1 => e1.電號 == e.電號)?.校區;
     });
     $("#output")
         .pivotUI(result, {
