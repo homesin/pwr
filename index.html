@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>NCYU用水用電統計</title>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+    <!-- 原有的相依套件引入 -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DKN9QV31DZ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -14,162 +16,346 @@
         gtag('js', new Date());
         gtag('config', 'G-DKN9QV31DZ');
     </script>
+
+    <!-- 必要的外部函式庫 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <!-- external libs from cdnjs -->
-    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>-->
-    <script src="jquery.min.js"></script>
-    <script src="jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-    <!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>-->
-    <!-- PivotTable.js libs from cdnjs -->
-    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.14.0/pivot.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.14.0/pivot.min.css"> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <!-- PivotTable 相關 -->
     <script src="pivot.js"></script>
     <link rel="stylesheet" href="pivot.css">
-
-    <!-- subtotal.js libs from ../dist -->
     <script src="subtotal.js"></script>
-    <link rel="stylesheet" type="text/css" href="subtotal.css">
-
-
-    <!-- optional: mobile support with jqueryui-touch-punch -->
-    <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> -->
+    <link rel="stylesheet" href="subtotal.css">
     <script src="jquery.ui.touch-punch.min.js"></script>
 
+    <!-- 其他需要的函式庫 -->
     <script src="papaparse.js"></script>
     <script src="plotly-basic-latest.min.js"></script>
-    <!--<script src="FileSaver.js"></script>   
-    <script src="tableexport.js"></script>
-    <script src="xls.core.js"></script>-->
-    <script type="text/javascript" src="./dist/d3_renderers.js"></script>
-    <script type="text/javascript" src="./dist/plotly_renderers.js"></script>
-    <script type="text/javascript" src="./dist/export_renderers.js"></script>
-    <!-- <script src="alasql.js"></script> -->
-    <!--datatables object-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css" />
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+
+    <!-- Renderers -->
+    <script src="./dist/d3_renderers.js"></script>
+    <script src="./dist/plotly_renderers.js"></script>
+    <script src="./dist/export_renderers.js"></script>
+
     <style>
-        .node {
-            border: solid 1px white;
-            font: 10px sans-serif;
-            line-height: 12px;
-            overflow: hidden;
-            position: absolute;
-            text-indent: 2px;
+        /* 基礎樣式 */
+        body {
+            margin: 0;
+            padding: 60px 0 0 0;
+            /* 為固定的導航欄留出空間 */
+            font-family: Arial, sans-serif;
         }
 
+        /* 頂部導航欄 */
+        .top-nav {
+            background: linear-gradient(to right, #1a237e, #0d47a1);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 60px;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+        }
+
+        .navbar {
+            padding: 0;
+        }
+
+        .nav-title {
+            color: white;
+            margin-right: 2rem;
+        }
+
+        /* 下拉選單樣式 */
         .btn-group {
-            margin-right: 5px;
-            margin-bottom: 5px;
+            margin-right: 1rem;
+        }
+
+        .dropdown-menu {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+        }
+
+        .dropdown-item:hover {
+            background-color: #e3f2fd;
+            color: #1a237e;
+        }
+
+        .dropdown-divider {
+            margin: 0.25rem 0;
+        }
+
+        /* 主要內容區域 */
+        .main-content {
+            padding: 1rem;
+            background: #f5f5f5;
+            min-height: calc(100vh - 60px);
+        }
+
+        /* 內容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* 麵包屑導航 */
+        .breadcrumb {
+            background: white;
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 載入動畫 */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+        }
+
+        .loading::after {
+            content: "";
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1a237e;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* 新功能標記 */
+        .badge-new {
+            background: #ffd700;
+            color: #333;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+        }
+
+        /* 更新時間 */
+        .update-time {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.875rem;
+            margin-left: auto;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .update-time {
+                display: none;
+            }
+
+            .btn-group {
+                margin-right: 0.5rem;
+            }
+
+            .nav-title {
+                font-size: 0.9rem;
+                margin-right: 1rem;
+            }
         }
     </style>
-
-
 </head>
 
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
-                    <form class="form-inline my-2 my-lg-0">
-                        <div class="btn-group">
-                            <button class="btn btn-info dropdown-toggle btn-sm" type="button"
-                                id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                能管系統用電統計<span class="badge bg-warning">New</span>
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" onclick="MeterThisYear();">用電情形</a>
-                                <div class="dropdown-divider"></div>
-                                <!-- <a class="dropdown-item" onclick="MeterFromLastYear();">與去年相比</a>
-                                <a class="dropdown-item" onclick="MeterRatioRank();">同期排行</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="MeterFromLast5Year();">近5年度用電情形</a>
-                                <div class="dropdown-divider"></div> -->
-                                <a class="dropdown-item" onclick="MeterAll();">所有年度用電情形</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="MeterRaw();">自行定義</a>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <button class="btn btn-success  dropdown-toggle btn-sm" type="button"
-                                id="dropdownMenuButton3" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                台電用電統計
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" onclick="今年用電();">今年用電情形</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="用電與去年相比();">與去年相比</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="近5年度用電();">近5年度用電情形</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="所有年度用電();">所有年度用電情形</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="用電自行定義();">自行定義</a>
-                            </div>
-                        </div>
-                        <div class="btn-group">
-                            <button class="btn btn-primary  dropdown-toggle btn-sm" type="button"
-                                id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                自來水用水統計
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" onclick="今年用水();">今年用水情形</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="用水與去年相比();">與去年相比</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="近5年度用水();">近5年度用水情形</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="所有年度用水();">所有年度用水情形</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="用水自行定義();">自行定義</a>
-                            </div>
-                        </div>                        
-                        <div class="btn-group">
-                            <button class="btn btn-secondary dropdown-toggle btn-sm" type="button"
-                                id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                自設電錶統計(統計至2021年底)
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <!-- <a class="dropdown-item" onclick="今年();">今年用電情形</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="與去年相比();">與去年相比</a>
-                                <a class="dropdown-item" onclick="同期排行();">同期排行</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="近5年度();">近5年度用電情形</a>
-                                <div class="dropdown-divider"></div> -->
-                                <a class="dropdown-item" onclick="所有年度();">歷史資料</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" onclick="自行定義();">自行定義</a>
-                            </div>
-                        </div>
-                    </form>
-                </nav>
+    <!-- 頂部導航欄 -->
+    <nav class="top-nav">
+        <span class="nav-title">國立嘉義大學用水用電統計系統</span>
+
+        <!-- 能源管理系統用電統計 -->
+        <div class="btn-group">
+            <button class="btn btn-info btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                能源管理系統用電統計 <span class="badge badge-warning">New</span>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" onclick="handleClick('能源管理系統/本年度用電', UsageAnalytics.MeterThisYear)">本年度用電情形</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" onclick="handleClick('能源管理系統/與去年比較', UsageAnalytics.MeterComparison)">與去年相比</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item"
+                    onclick="handleClick('能源管理系統/近5年度用電', UsageAnalytics.MeterLast5Years)">近5年度用電情形</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" onclick="handleClick('能源管理系統/所有年度用電', UsageAnalytics.MeterAll)">所有年度用電情形</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" onclick="handleClick('能源管理系統/自定義', UsageAnalytics.MeterRaw)">自行定義</a>
             </div>
         </div>
 
-        <div class="row" >
-            <div class="col-md-12">
-                <h5 id='head'></h5>
-                <div id="output"></div>
+        <!-- 台電用電統計 -->
+        <div class="btn-group">
+            <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                台電用電統計
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" onclick="handleClick('台電/本年度用電', UsageAnalytics.renderPowerUsage)">本年度用電情形</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item"
+                    onclick="handleClick('台電/與去年相比', UsageAnalytics.renderPowerUsageComparison)">與去年相比</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item"
+                    onclick="handleClick('台電/近5年度用電', UsageAnalytics.renderPowerUsageLast5Years)">近5年度用電情形</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item"
+                    onclick="handleClick('台電/所有年度用電', UsageAnalytics.renderPowerUsageAllYears)">所有年度用電情形</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" onclick="handleClick('台電/自定義', UsageAnalytics.renderPowerUsageCustom)">自行定義</a>
             </div>
         </div>
-    </div>
 
+        <!-- 自來水用水統計 -->
+        <div class="btn-group">
+            <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                自來水用水統計
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" onclick="handleClick('用水/本年度用水', UsageAnalytics.renderWaterUsage)">本年度用水情形</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item"
+                    onclick="handleClick('用水/與去年相比', UsageAnalytics.renderWaterUsageComparison)">與去年相比</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item"
+                    onclick="handleClick('用水/近5年度用水', UsageAnalytics.renderWaterUsageLast5Years)">近5年度用水情形</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item"
+                    onclick="handleClick('用水/所有年度用水', UsageAnalytics.renderWaterUsageAllYears)">所有年度用水情形</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" onclick="handleClick('用水/自定義', UsageAnalytics.renderWaterUsageCustom)">自行定義</a>
+            </div>
+        </div>
+
+        <!-- 自設電錶統計 -->
+        <div class="btn-group">
+            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown">
+                自設電錶統計 (統計至2021年底)
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item"
+                    onclick="handleClick('自設/歷史資料', UsageAnalytics.renderLegacyMeterAllYears)">歷史資料</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item"
+                    onclick="handleClick('自設/自定義', UsageAnalytics.renderLegacyMeterCustom)">自行定義</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容區域 -->
+    <main class="main-content">
+        <div class="breadcrumb" id="breadcrumb">首頁</div>
+        <div class="content-card">
+            <h5 id="head"></h5>
+            <div id="output"></div>
+        </div>
+    </main>
+
+    <!-- 主程式碼 -->
     <script src="usage.js"></script>
+
+    <script>
+        // 處理功能點擊
+        function handleClick(path, callback) {
+            // 更新麵包屑
+            updateBreadcrumb(path);
+
+            // 顯示載入動畫
+            showLoading();
+
+            // 執行回調函數
+            try {
+                callback();
+            } catch (error) {
+                showError(error.message);
+            }
+
+            // 保存最後訪問的功能
+            localStorage.setItem('lastPath', path);
+        }
+
+        // 更新麵包屑
+        function updateBreadcrumb(path) {
+            document.getElementById('breadcrumb').textContent = `首頁 > ${path}`;
+        }
+
+        // 顯示載入動畫
+        function showLoading() {
+            const output = document.getElementById('output');
+            output.innerHTML = '<div class="loading"></div>';
+        }
+
+        // 顯示錯誤訊息
+        function showError(message) {
+            const output = document.getElementById('output');
+            output.innerHTML = `
+                <div class="alert alert-danger" role="alert">
+                    <strong>錯誤：</strong> ${message}
+                </div>
+            `;
+        }
+
+        // 更新時間
+        // function updateLastUpdateTime() {
+        //     const now = new Date();
+        //     document.getElementById('lastUpdate').textContent =
+        //         `最後更新：${now.toLocaleString()}`;
+        // }
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', async function () {
+            //updateLastUpdateTime();
+            //setInterval(updateLastUpdateTime, 60000);
+
+            // 恢復最後訪問的功能
+            const lastPath = localStorage.getItem('lastPath');
+            if (lastPath) {
+                updateBreadcrumb(lastPath);
+            }
+
+            // 初始化數據並執行第一個功能
+            await DataLoader.initializeData();
+            try {
+                await UsageAnalytics.MeterThisYear();
+            } catch (error) {
+                showError(error.message);
+            }
+        });
+
+        // 全域錯誤處理
+        window.onerror = function (message, source, lineno, colno, error) {
+            showError(`${message}\n來源：${source}\n行號：${lineno}`);
+            return false;
+        };
+    </script>
 </body>
 
 </html>
