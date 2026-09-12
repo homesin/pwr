@@ -272,7 +272,15 @@
 
     <!-- 主要內容區域 -->
     <main class="main-content">
-        <div class="breadcrumb" id="breadcrumb">首頁</div>
+        <div class="breadcrumb d-flex justify-content-between align-items-center">
+            <span id="breadcrumb">首頁</span>
+            <div class="custom-control custom-switch" id="samePeriodWrapper" hidden>
+                <input type="checkbox" class="custom-control-input" id="samePeriodToggle"
+                    onchange="handleSamePeriodToggle(this.checked)">
+                <label class="custom-control-label" for="samePeriodToggle"
+                    title="開啟後，非本年度的資料只計入到與本年度相同的月份，方便同期比較">同期比較</label>
+            </div>
+        </div>
         <div class="content-card">
             <h5 id="head"></h5>
             <div id="output"></div>
@@ -283,6 +291,9 @@
     <script src="usage.js"></script>
 
     <script>
+        // 「本年度」報表不支援同期比較，顯示時隱藏開關
+        const NO_SAME_PERIOD_PATHS = ['能源管理系統/本年度用電', '台電/本年度用電', '用水/本年度用水'];
+
         // 處理功能點擊
         function handleClick(path, callback) {
             // 更新麵包屑
@@ -290,6 +301,12 @@
 
             // 顯示載入動畫
             showLoading();
+
+            // 記住目前的報表，供切換「同期比較」開關時重新渲染
+            window.currentRenderFn = callback;
+
+            // 「本年度」報表不受同期比較影響，隱藏開關
+            document.getElementById('samePeriodWrapper').hidden = NO_SAME_PERIOD_PATHS.includes(path);
 
             // 執行回調函數
             try {
@@ -300,6 +317,21 @@
 
             // 保存最後訪問的功能
             localStorage.setItem('lastPath', path);
+        }
+
+        // 處理「同期比較」開關切換
+        function handleSamePeriodToggle(checked) {
+            UsageAnalytics.setSamePeriod(checked);
+            localStorage.setItem('samePeriodOnly', checked ? '1' : '0');
+
+            if (window.currentRenderFn) {
+                showLoading();
+                try {
+                    window.currentRenderFn();
+                } catch (error) {
+                    showError(error.message);
+                }
+            }
         }
 
         // 更新麵包屑
@@ -341,8 +373,14 @@
                 updateBreadcrumb(lastPath);
             }
 
+            // 恢復「同期比較」開關狀態
+            const samePeriodOnly = localStorage.getItem('samePeriodOnly') === '1';
+            document.getElementById('samePeriodToggle').checked = samePeriodOnly;
+            UsageAnalytics.setSamePeriod(samePeriodOnly);
+
             // 初始化數據並執行第一個功能
             await DataLoader.initializeData();
+            window.currentRenderFn = UsageAnalytics.MeterThisYear;
             try {
                 await UsageAnalytics.MeterThisYear();
             } catch (error) {

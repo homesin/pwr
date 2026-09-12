@@ -305,6 +305,11 @@ const DOMManager = {
     }
 };
 
+// 全域狀態
+const State = {
+    samePeriodOnly: false
+};
+
 // 數據處理器
 const DataProcessor = {
     validateData(data) {
@@ -312,6 +317,12 @@ const DataProcessor = {
             throw new Error('無效的數據格式');
         }
         return data.filter(item => item && typeof item === 'object');
+    },
+
+    // 將非本年度的資料裁切到與本年度相同的月份範圍，用於「同期比較」
+    restrictToSamePeriod(data, yearField, monthField, currentYearLabel, month1) {
+        if (!month1 || !isFinite(month1)) return data;
+        return data.filter(e => e[yearField] == currentYearLabel || parseInt(e[monthField]) <= month1);
     },
 
     processElectricityData(rawData) {
@@ -444,11 +455,16 @@ const DataLoader = {
 
 // 主要功能實現
 const UsageAnalytics = {
+    // 設定「同期比較」開關狀態，開啟後非本年度資料只會計入到與本年度相同的月份
+    setSamePeriod(enabled) {
+        State.samePeriodOnly = !!enabled;
+    },
+
     // 能管系統用電統計
     async MeterThisYear() {
         const { year } = Utils.getCurrentTime();
         const result = DataProcessor.processMeterData(mresults)
-            .filter(e => e.帳單年 == moment().format('YYYY') - 1911 + '年');
+            .filter(e => e.帳單年 == year + '年');
 
         const month1 = Math.max(...[...new Set(result
             .filter(e => e.帳單年 == year + '年')
@@ -465,8 +481,17 @@ const UsageAnalytics = {
 
 
     async MeterAll() {
-        const result = DataProcessor.processMeterData(mresults);
-        DOMManager.updateTitle('國立嘉義大學能源管理系統各棟建築物所有年度用電情形');
+        const { year } = Utils.getCurrentTime();
+        let result = DataProcessor.processMeterData(mresults);
+
+        if (State.samePeriodOnly) {
+            const month1 = Math.max(...[...new Set(result
+                .filter(e => e.帳單年 == year + '年')
+                .map(e => e.帳單月.replace('月', '')))]);
+            result = DataProcessor.restrictToSamePeriod(result, '帳單年', '帳單月', year + '年', month1);
+        }
+
+        DOMManager.updateTitle(`國立嘉義大學能源管理系統各棟建築物所有年度用電情形${State.samePeriodOnly ? '（同期比較）' : ''}`);
 
         ChartRenderer.renderPivotTable(result, {
             rows: ["校區", "建築物", "帳單年"],
@@ -476,14 +501,18 @@ const UsageAnalytics = {
     },
     async MeterComparison() {
         const { year } = Utils.getCurrentTime();
-        const result = DataProcessor.processMeterData(mresults)
+        let result = DataProcessor.processMeterData(mresults)
             .filter(e => [0, -1].map(e => e + year + '年').includes(e.帳單年));
 
         const month1 = Math.max(...[...new Set(result
             .filter(e => e.帳單年 == year + '年')
             .map(e => e.帳單月.replace('月', '')))]);
 
-        DOMManager.updateTitle(`國立嘉義大學能源管理系統各棟建築物用電情形與去年相比${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}`);
+        if (State.samePeriodOnly) {
+            result = DataProcessor.restrictToSamePeriod(result, '帳單年', '帳單月', year + '年', month1);
+        }
+
+        DOMManager.updateTitle(`國立嘉義大學能源管理系統各棟建築物用電情形與去年相比${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}${State.samePeriodOnly ? '（同期比較）' : ''}`);
 
         ChartRenderer.renderPivotTable(result, {
             rows: ["校區", "建築物", "帳單年"],
@@ -493,14 +522,18 @@ const UsageAnalytics = {
     },
     async MeterLast5Years() {
         const { year } = Utils.getCurrentTime();
-        const result = DataProcessor.processMeterData(mresults)
+        let result = DataProcessor.processMeterData(mresults)
             .filter(e => [0, -1, -2, -3, -4].map(e => e + year + '年').includes(e.帳單年));
 
         const month1 = Math.max(...[...new Set(result
             .filter(e => e.帳單年 == year + '年')
             .map(e => e.帳單月.replace('月', '')))]);
 
-        DOMManager.updateTitle(`國立嘉義大學能源管理系統各棟建築物用電情形與去年相比${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}`);
+        if (State.samePeriodOnly) {
+            result = DataProcessor.restrictToSamePeriod(result, '帳單年', '帳單月', year + '年', month1);
+        }
+
+        DOMManager.updateTitle(`國立嘉義大學能源管理系統各棟建築物用電情形與去年相比${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}${State.samePeriodOnly ? '（同期比較）' : ''}`);
 
         ChartRenderer.renderPivotTable(result, {
             rows: ["校區", "建築物", "帳單年"],
@@ -539,12 +572,16 @@ const UsageAnalytics = {
 
     async renderWaterUsageComparison() {
         const { year } = Utils.getCurrentTime();
-        const result = DataProcessor.processWaterData(wresults)
+        let result = DataProcessor.processWaterData(wresults)
             .filter(e => [0, -1].map(e => e + year + '年').includes(e.水費年));
 
         const month1 = Math.max(...[...new Set(result.filter(e => e.水費年 == year + '年').map(e => parseInt(e.水費月)))]);
 
-        DOMManager.updateTitle(`國立嘉義大學本年度用水情形與去年相比${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}`);
+        if (State.samePeriodOnly) {
+            result = DataProcessor.restrictToSamePeriod(result, '水費年', '水費月', year + '年', month1);
+        }
+
+        DOMManager.updateTitle(`國立嘉義大學本年度用水情形與去年相比${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}${State.samePeriodOnly ? '（同期比較）' : ''}`);
 
         ChartRenderer.renderPivotTable(result, {
             rows: ["校區", "供水區", "水費年"],
@@ -555,11 +592,15 @@ const UsageAnalytics = {
 
     async renderWaterUsageLast5Years() {
         const { year } = Utils.getCurrentTime();
-        const result = DataProcessor.processWaterData(wresults)
+        let result = DataProcessor.processWaterData(wresults)
             .filter(e => [0, -1, -2, -3, -4].map(e => e + year + '年').includes(e.水費年));
         const month1 = Math.max(...[...new Set(result.filter(e => e.水費年 == year + '年').map(e => parseInt(e.水費月)))]);
 
-        DOMManager.updateTitle(`國立嘉義大學近5年度用水情形${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}`);
+        if (State.samePeriodOnly) {
+            result = DataProcessor.restrictToSamePeriod(result, '水費年', '水費月', year + '年', month1);
+        }
+
+        DOMManager.updateTitle(`國立嘉義大學近5年度用水情形${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}${State.samePeriodOnly ? '（同期比較）' : ''}`);
 
         ChartRenderer.renderPivotTable(result, {
             rows: ["校區", "供水區", "水費年"],
@@ -569,8 +610,15 @@ const UsageAnalytics = {
     },
 
     async renderWaterUsageAllYears() {
-        const result = DataProcessor.processWaterData(wresults);
-        DOMManager.updateTitle('國立嘉義大學所有年度用水情形');
+        const { year } = Utils.getCurrentTime();
+        let result = DataProcessor.processWaterData(wresults);
+
+        if (State.samePeriodOnly) {
+            const month1 = Math.max(...[...new Set(result.filter(e => e.水費年 == year + '年').map(e => parseInt(e.水費月)))]);
+            result = DataProcessor.restrictToSamePeriod(result, '水費年', '水費月', year + '年', month1);
+        }
+
+        DOMManager.updateTitle(`國立嘉義大學所有年度用水情形${State.samePeriodOnly ? '（同期比較）' : ''}`);
 
         ChartRenderer.renderPivotTable(result, {
             rows: ["校區", "供水區", "水費年"],
@@ -610,13 +658,17 @@ const UsageAnalytics = {
 
     async renderPowerUsageComparison() {
         const { year } = Utils.getCurrentTime();
-        const result = DataProcessor.processElectricityData(tresults)
+        let result = DataProcessor.processElectricityData(tresults)
             .filter(list => CONFIG.POWER_IDS.includes(list.電號))
             .filter(e => [0, -1].map(e => e + year + '年').includes(e.收費年));
 
         const month1 = Math.max(...[...new Set(result.filter(e => e.收費年 == year + '年').map(e => parseInt(e.收費月)))]);
 
-        DOMManager.updateTitle(`國立嘉義大學本年度用電情形與去年相比${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}`);
+        if (State.samePeriodOnly) {
+            result = DataProcessor.restrictToSamePeriod(result, '收費年', '收費月', year + '年', month1);
+        }
+
+        DOMManager.updateTitle(`國立嘉義大學本年度用電情形與去年相比${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}${State.samePeriodOnly ? '（同期比較）' : ''}`);
 
         ChartRenderer.renderPivotTable(result, {
             rows: ["校區", "電號別名", "收費年"],
@@ -627,13 +679,17 @@ const UsageAnalytics = {
 
     async renderPowerUsageLast5Years() {
         const { year } = Utils.getCurrentTime();
-        const result = DataProcessor.processElectricityData(tresults)
+        let result = DataProcessor.processElectricityData(tresults)
             .filter(list => CONFIG.POWER_IDS.includes(list.電號))
             .filter(e => [0, -1, -2, -3, -4].map(e => e + year + '年').includes(e.收費年));
 
         const month1 = Math.max(...[...new Set(result.filter(e => e.收費年 == year + '年').map(e => parseInt(e.收費月)))]);
 
-        DOMManager.updateTitle(`國立嘉義大學近5年度用電情形${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}`);
+        if (State.samePeriodOnly) {
+            result = DataProcessor.restrictToSamePeriod(result, '收費年', '收費月', year + '年', month1);
+        }
+
+        DOMManager.updateTitle(`國立嘉義大學近5年度用電情形${month1 != 1 ? `(1月至${month1}月)` : '(1月)'}${State.samePeriodOnly ? '（同期比較）' : ''}`);
 
         ChartRenderer.renderPivotTable(result, {
             rows: ["校區", "電號別名", "收費年"],
@@ -643,10 +699,16 @@ const UsageAnalytics = {
     },
 
     async renderPowerUsageAllYears() {
-        const result = DataProcessor.processElectricityData(tresults)
+        const { year } = Utils.getCurrentTime();
+        let result = DataProcessor.processElectricityData(tresults)
             .filter(list => CONFIG.POWER_IDS.includes(list.電號));
 
-        DOMManager.updateTitle('國立嘉義大學所有年度用電情形');
+        if (State.samePeriodOnly) {
+            const month1 = Math.max(...[...new Set(result.filter(e => e.收費年 == year + '年').map(e => parseInt(e.收費月)))]);
+            result = DataProcessor.restrictToSamePeriod(result, '收費年', '收費月', year + '年', month1);
+        }
+
+        DOMManager.updateTitle(`國立嘉義大學所有年度用電情形${State.samePeriodOnly ? '（同期比較）' : ''}`);
 
         ChartRenderer.renderPivotTable(result, {
             rows: ["校區", "電號別名", "收費年"],
